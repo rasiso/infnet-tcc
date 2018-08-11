@@ -1,0 +1,17 @@
+:: ALTERAÇÕES NAS TABELAS ::
+
+AVALIACAO
+Remover relacionamento com Turma
+Remover relacionamento com Aluno
+Criar relacionamento com Turma_x_Aluno
+Criar relação com Usuário
+
+
+Criar Classe Pessoa -> Extender Usuario, Aluno e professor
+
+Criar Sexo na Classe Pessoa
+
+
+
+ 
+
