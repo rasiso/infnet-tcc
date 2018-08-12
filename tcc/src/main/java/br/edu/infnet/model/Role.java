@@ -24,7 +24,8 @@ public class Role implements Serializable {
 	
 	@Column(name="role")
 	private String role;
-	@ManyToMany(mappedBy = "usuario")
+	
+	@ManyToMany
 	private Set<Usuario> usuarios;
 	
 	public Role() {};
