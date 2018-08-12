@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
 	@Column(name = "active")
 	private int active;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL )
 	@JoinTable(name = "usuario_role", joinColumns = @JoinColumn
 	          (name = "usuario_id" ,referencedColumnName = "id"), 
 	          inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
