@@ -46,14 +46,14 @@
 				<div class="x_panel">
 					<div class="x_content">
 						<br />
-						<form id="demo-form2" th:object="${curso}" th:action="@{/curso}" method="POST" data-parsley-validate class="form-horizontal form-label-left">
-
+						<form id="demo-form2" th:action="@{/curso}" th:method="${method}" data-parsley-validate class="form-horizontal form-label-left">
+							<input th:type="hidden" name="id" th:field="${curso.id}" />
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="first-name">Código <span class="required">*</span>
 								</label>
 								<div class="col-md-2 col-sm-12 col-xs-12">
-									<input type="text" th:field="*{codigo}" required="required"
+									<input type="text" th:field="${curso.codigo}" required="required"
 										class="form-control col-md-2 col-xs-12">
 								</div>
 							</div>
@@ -62,7 +62,7 @@
 									for="last-name">Nome <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-12 col-xs-12">
-									<input type="text" th:field="*{nome}" required="required" 
+									<input type="text" th:field="${curso.nome}" required="required" 
 									class="form-control col-md-6 col-xs-12">
 								</div>
 							</div>
@@ -98,14 +98,17 @@
 									<td th:text="${curso.codigo}"></td>
 									<td th:text="${curso.nome}"></td>
 									<td>
-									<div class="btn-group  btn-group-xs">
-										<form method="DELETE" th:action="@{/curso}" th:id="${curso.id}">
-	          								<input type="hidden" th:id="${curso.id}" th:value="${curso.id}" />
-	    									<button type="submit" class="btn btn-default"><i title="Editar" class="fa fa-edit"></i></button>
-										</form:form>
-		                        
-		                        		<!-- <a class="btn btn-default" type="button" data-method="delete" th:href="@{'/curso/' + ${curso.id}}" ><i title="Excluir" class="fa fa-trash"></i></a> -->
-		                      		</div>
+										<!-- <div class="btn-group  btn-group-xs">
+					                        <a th:href="@{/curso/edit/{id}(id=${curso.id})}" class="btn btn-warning btn-xs"><i title="Editar" class="fa fa-edit"></i></a>
+					                        <a th:href="@{/curso/delete/{id}(id=${curso.id})}" class="btn btn-danger btn-xs"><i title="Excluir" class="fa fa-trash"></i></a>
+				                      	</div> -->
+				                      	<form th:method="GET" th:action="@{/curso/{id}(id=${curso.id})}" >
+				                      		<button type="submit" class="btn btn-warning btn-xs" style="float: left;"><i title="Editar" class="fa fa-edit"></i></button>
+										</form>
+										<form th:method="DELETE" th:action="@{/curso/{id}(id=${curso.id})}" >
+				                      		<button type="submit" class="btn btn-danger btn-xs" style="float: left;"><i title="Excluir" class="fa fa-trash"></i></button>
+										</form>
+										
 									</td>
 								</tr>
 							</tbody>
