@@ -8,5 +8,5 @@ import br.edu.infnet.model.Usuario;
 
 @Repository("userRepository")
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
-	 Usuario findByEmail(String email);
+	 public Usuario findByEmail(String email);
 }

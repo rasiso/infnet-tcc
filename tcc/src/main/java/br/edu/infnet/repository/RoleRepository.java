@@ -7,6 +7,6 @@ import br.edu.infnet.model.Role;
 
 @Repository("roleRepository")
 public interface RoleRepository extends JpaRepository<Role, Long>{
-	Role findByRole(String descricao);
+	public Role findByRole(String descricao);
 
 }
