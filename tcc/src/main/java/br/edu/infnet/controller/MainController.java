@@ -19,17 +19,6 @@ public class MainController {
 	@Autowired
 	private CursoRepository cursoRepository;
 	
-	@Autowired
-	private UsuarioService usuarioService;
-
-	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
-	public ModelAndView login(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("login");
-		return modelAndView;
-	}
-	
-	
 	@GetMapping
 	public ModelAndView listar() {
 		
