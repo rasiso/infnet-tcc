@@ -31,7 +31,7 @@ public class Role implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getCDescricao() {
+	public String getDescricao() {
 		return descricao;
 	}
 	public void setRole(String descricao) {
