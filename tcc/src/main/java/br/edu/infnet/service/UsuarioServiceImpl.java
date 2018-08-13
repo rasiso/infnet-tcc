@@ -15,7 +15,7 @@ import br.edu.infnet.repository.UsuarioRepository;
 
 
 
-@Service("usuarioService")
+@Service("usuarioServiceImpl")
 public class UsuarioServiceImpl implements UsuarioService{
 
 	@Autowired

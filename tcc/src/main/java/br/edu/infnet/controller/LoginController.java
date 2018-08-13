@@ -3,11 +3,8 @@ package br.edu.infnet.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +17,7 @@ import br.edu.infnet.service.UsuarioService;
 public class LoginController {
 	
 	@Autowired
-	private UsuarioService  usuarioService;
+	private UsuarioService  usuarioServiceImpl;
 
 	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
 	public ModelAndView login(){
@@ -42,7 +39,7 @@ public class LoginController {
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUsuario(@Valid Usuario usuario, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		Usuario UsuarioExists = usuarioService.findUserByEmail(usuario.getEmail());
+		Usuario UsuarioExists = usuarioServiceImpl.findUserByEmail(usuario.getEmail());
 		if (UsuarioExists != null) {
 			bindingResult
 					.rejectValue("email", "error.Usuario",
@@ -51,7 +48,7 @@ public class LoginController {
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registro");
 		} else {
-			usuarioService.saveUser(usuario);
+			usuarioServiceImpl.saveUser(usuario);
 			modelAndView.addObject("successMessage", "Usuario registrado com sucesso");
 			modelAndView.addObject("Usuario", new Usuario());
 			modelAndView.setViewName("registration");
