@@ -1,30 +1,17 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-  xmlns:th="http://www.thymeleaf.org" 
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-  layout:decorate="~{mainTemplate}">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<title>Spring Security Tutorial</title>
-  		<th:block layout:fragment="css">
-		<!-- iCheck -->
-	    <link href="/template/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-	    <!-- bootstrap-wysiwyg -->
-	    <link href="/template/vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-	    <!-- Select2 -->
-	    <link href="/template/vendors/select2/dist/css/select2.min.css" rel="stylesheet">
-	    <!-- Switchery -->
-	    <link href="/template/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
-	    <!-- starrr -->
-	    <link href="/template/vendors/starrr/dist/starrr.css" rel="stylesheet">
-	    <!-- bootstrap-daterangepicker -->
-	    <link href="/template/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-	</th:block>  	
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
  
 <body>
-	<div layout:fragment="page_content" id="page_content">
-	<!--div class="container"-->
+	<div class="container">
 		<img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
 		<form th:action="@{/login}" method="POST" class="form-signin">
 			<h3 class="form-signin-heading" th:text="Bemvindo"></h3>
