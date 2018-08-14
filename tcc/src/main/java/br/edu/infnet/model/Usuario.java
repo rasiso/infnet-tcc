@@ -1,6 +1,7 @@
 package br.edu.infnet.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -38,7 +39,7 @@ public class Usuario implements Serializable {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+	private Collection<Role> roles;
 
 	public Long getId() {
 		return id;
@@ -80,11 +81,11 @@ public class Usuario implements Serializable {
 		this.active = active;
 	}
 
-	public Set<Role> getRoles() {
+	public Collection<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
 
