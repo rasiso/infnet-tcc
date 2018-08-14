@@ -13,7 +13,7 @@ import br.edu.infnet.repository.CursoRepository;
 import br.edu.infnet.service.UsuarioService;
 
 @Controller
-@RequestMapping("/main")
+//@RequestMapping("/main")
 public class MainController {
 
 	@Autowired
