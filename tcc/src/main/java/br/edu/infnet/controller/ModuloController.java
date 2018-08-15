@@ -14,50 +14,50 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.edu.infnet.model.Curso;
-import br.edu.infnet.repository.CursoRepository;
+import br.edu.infnet.model.Modulo;
+import br.edu.infnet.repository.ModuloRepository;
 
 @Controller
-@RequestMapping("/curso")
-public class CursoController {
+@RequestMapping("/modulo")
+public class ModuloController {
 
 	@Autowired
-	private CursoRepository cursoRepository;
+	private ModuloRepository moduloRepository;
 	
 	@GetMapping
 	public ModelAndView listar() {
-		ModelAndView mav = new ModelAndView("cursoMain");
-		mav.addObject(new Curso());
-		mav.addObject("cursos", this.cursoRepository.findAll());
+		ModelAndView mav = new ModelAndView("moduloMain");
+		mav.addObject(new Modulo());
+		mav.addObject("modulos", this.moduloRepository.findAll());
 		return mav;
 	}
 	
 	@GetMapping("/edit/{id}")
 	public ModelAndView getById(@PathVariable long id, ModelMap model) {
-		ModelAndView mav = new ModelAndView("cursoMain");
-		mav.addObject("curso", this.cursoRepository.findById(id));
-		mav.addObject("cursos", this.cursoRepository.findAll());
+		ModelAndView mav = new ModelAndView("moduloMain");
+		mav.addObject("modulo", this.moduloRepository.findById(id));
+		mav.addObject("modulos", this.moduloRepository.findAll());
 		return mav;
 	}
 	
 	@GetMapping("/delete/{id}")
 	public String deletar(@PathVariable long id) {
-		this.cursoRepository.deleteById(id);
-		return "redirect:/curso";
+		this.moduloRepository.deleteById(id);
+		return "redirect:/modulo";
 	}
 	
 	@PostMapping
-	public String salvar(Curso curso) {
-		this.cursoRepository.save(curso);
-		return "redirect:/curso";
+	public String salvar(Modulo modulo) {
+		this.moduloRepository.save(modulo);
+		return "redirect:/modulo";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list/getByNameStartingWith")
-	public List<Curso> findIdAsValueAndNomeAsDataByNomeStartingWith(@RequestParam("query") String query){
-		List<Curso> cursos = new ArrayList<>();
-		cursos = this.cursoRepository.findByNomeStartingWith(query);
-		return cursos;
+	public List<Modulo> findIdAsValueAndNomeAsDataByNomeStartingWith(@RequestParam("query") String query){
+		List<Modulo> modulos = new ArrayList<>();
+		modulos = this.moduloRepository.findByNomeStartingWith(query);
+		return modulos;
 	}
 	
 }

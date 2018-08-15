@@ -11,7 +11,7 @@ import br.edu.infnet.model.Curso;
 import br.edu.infnet.repository.CursoRepository;
 
 @Controller
-@RequestMapping("/main")
+@RequestMapping("/")
 public class MainController {
 
 	@Autowired
