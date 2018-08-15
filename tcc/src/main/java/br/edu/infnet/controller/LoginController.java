@@ -3,6 +3,8 @@ package br.edu.infnet.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,27 +58,27 @@ public class LoginController {
 		}
 		return modelAndView;
 	}
-	/*
+	
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public ModelAndView home(){
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Usuario usuario = usuarioService.findUserByEmail(auth.getName());
+		Usuario usuario = usuarioServiceImpl.findUserByEmail(auth.getName());
 		System.out.println(usuario.getPassword());
 		modelAndView.addObject("UsuarioName", "Benvindo " + usuario.getNome() + " (" + usuario.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Conteudo somente para usuarios do grupo admin");
-		modelAndView.setViewName("home");
+		modelAndView.setViewName("main");
 		return modelAndView;
-	}*/
-
-	@RequestMapping(value="/main", method = RequestMethod.GET)
+	}
+	
+	/*@RequestMapping(value="/main", method = RequestMethod.GET)
 	public ModelAndView listar() {
 		
 		ModelAndView mav = new ModelAndView("main");
 		//mav.addObject("main", this.cursoRepository.findAll()).addObject(new Curso());
 		return mav;
 	
-	}
+	}*/
 	
 	
 	
