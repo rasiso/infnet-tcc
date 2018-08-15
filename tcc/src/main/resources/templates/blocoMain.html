@@ -5,106 +5,139 @@
   layout:decorate="~{mainTemplate}">
 
 <head>
-	<title>Cursos</title>
+	<title>Blocos</title>
+	<th:block layout:fragment="css">
+	    <!-- Datatables -->
+    	<link href="/template/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+	</th:block>
 </head>
 
 <div layout:fragment="page_content" id="page_content">
 	<div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Blocos <small></small></h3>
-              </div>
+		<div class="page-title">
+			<div class="title_left">
+				<h3>
+					Blocos <small></small>
+				</h3>
+			</div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <!-- <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span> -->
-                  </div>
-                </div>
-              </div>
-            </div>
+			<div class="title_right">
+				<div
+					class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+					<div class="input-group"></div>
+				</div>
+			</div>
+		</div>
 
-            <div class="clearfix"></div>
+		<div class="clearfix"></div>
 
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <!-- <div class="x_title">
-                    <h2>Cursos <small>Listagem</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div> -->
-                  <div class="x_content">
-                    <!-- <p class="text-muted font-13 m-b-30">
-                      DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
-                    </p> -->
-                    <table id="datatable" class="table table-striped table-bordered">
-						<thead>
-							<tr>
-								<th>Código</th>
-								<th>Nome</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="curso : ${cursos}">
-								<td th:text="${curso.codigo}"></td>
-								<td th:text="${curso.nome}"></td>
-							</tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              </div>
-              </div>
-              </div>
-	
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_content">
+						<br />
+						<form id="demo-form2" th:action="@{/bloco}" th:method="post" data-parsley-validate class="form-horizontal form-label-left">
+							<input th:type="hidden" name="id" th:field="${bloco.id}" />
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="first-name">Código <span class="required">*</span>
+								</label>
+								<div class="col-md-2 col-sm-12 col-xs-12">
+									<input type="text" th:field="${bloco.codigo}" required="required"
+										class="form-control col-md-2 col-xs-12">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="first-name">Curso <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<input id="cursoAutoComplete" type="text"
+										class="form-control col-md-2 col-xs-12" >
+									<input th:type="hidden" id="cursoId" th:field="${bloco.curso.id}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="last-name">Nome <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<input type="text" th:field="${bloco.nome}" required="required" 
+									class="form-control col-md-6 col-xs-12">
+								</div>
+							</div>
+							<div class="ln_solid"></div>
+							<div class="form-group">
+								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+									<button class="btn btn-primary" type="button">Cancelar</button>
+									<button class="btn btn-primary" type="reset">Limpar</button>
+									<button type="submit" class="btn btn-success">Salvar</button>
+								</div>
+							</div>
 
-	<!-- <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-	FastClick
-    <script src="/template/vendors/fastclick/lib/fastclick.js"></script>
-    NProgress
-    <script src="/template/vendors/nprogress/nprogress.js"></script>
-    iCheck
-    <script src="/template/vendors/iCheck/icheck.min.js"></script> -->
-    <!-- Datatables -->
-    <th:block layout:fragment="scripts">
-	
-    <script src="/template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/template/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="/template/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="/template/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="/template/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="/template/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="/template/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="/template/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="/template/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="/template/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/template/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="/template/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="/template/vendors/jszip/dist/jszip.min.js"></script>
-    <script src="/template/vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="/template/vendors/pdfmake/build/vfs_fonts.js"></script>
-	</th:block>
-    <!-- Custom Theme Scripts -->
-    <!-- <script src="/template/build/js/custom.min.js"></script> -->
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_content">
+						<table id="datatable" class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th width="15%">Código</th>
+									<th width="40%">Nome</th>
+									<th width="40%">Curso</th>
+									<th width="5%">Opções</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="bloco : ${blocos}">
+									<td th:text="${bloco.codigo}"></td>
+									<td th:text="${bloco.nome}"></td>
+									<td th:text="${bloco.curso.nome}"></td>
+									<td>
+										<div class="btn-group  btn-group-xs">
+					                        <a th:href="@{/bloco/edit/{id}(id=${bloco.id})}" class="btn btn-warning btn-xs"><i title="Editar" class="fa fa-pencil"></i></a>
+					                        <a th:href="@{/bloco/delete/{id}(id=${bloco.id})}" class="btn btn-danger btn-xs"><i title="Excluir" class="fa fa-trash"></i></a>
+				                      	</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<th:block layout:fragment="scripts">
+	<!-- Datatables -->
+	<script src="/template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="/template/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+   	<!-- jQuery autocomplete -->
+	<script src="/template/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+	<script>
+		$('#cursoAutoComplete').autocomplete({
+			serviceUrl: '/curso/list/getByNameStartingWith',
+			dataType: 'json',
+			suggestions: true,
+			transformResult: function(response) {
+		        return {
+		            suggestions: $.map(response, function(item) {
+		                return { value: item.nome, data: item.id };
+		            })
+		        };
+		    },
+		    onSelect : function (suggestion) {
+		    	$("#cursoId").val(suggestion.data);
+		    }
+		});
+	 </script>
+
+</th:block>
 </html>

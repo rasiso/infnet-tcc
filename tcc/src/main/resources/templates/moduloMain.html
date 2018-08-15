@@ -5,7 +5,7 @@
   layout:decorate="~{mainTemplate}">
 
 <head>
-	<title>Cursos</title>
+	<title>Modulos</title>
 	<th:block layout:fragment="css">
 	    <!-- Datatables -->
     	<link href="/template/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>
-					Cursos <small></small>
+					Módulos <small></small>
 				</h3>
 			</div>
 
@@ -36,15 +36,25 @@
 				<div class="x_panel">
 					<div class="x_content">
 						<br />
-						<form id="demo-form2" th:action="@{/curso}" th:method="post" data-parsley-validate class="form-horizontal form-label-left">
-							<input th:type="hidden" name="id" th:field="${curso.id}" />
+						<form id="demo-form2" th:action="@{/modulo}" th:method="post" data-parsley-validate class="form-horizontal form-label-left">
+							<input th:type="hidden" name="id" th:field="${modulo.id}" />
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="first-name">Código <span class="required">*</span>
 								</label>
 								<div class="col-md-2 col-sm-12 col-xs-12">
-									<input type="text" th:field="${curso.codigo}" required="required"
+									<input type="text" th:field="${modulo.codigo}" required="required"
 										class="form-control col-md-2 col-xs-12">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="first-name">Bloco <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<input id="blocoAutoComplete" type="text"
+										class="form-control col-md-2 col-xs-12" >
+									<input th:type="hidden" id="blocoId" th:field="${modulo.bloco.id}" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -52,7 +62,7 @@
 									for="last-name">Nome <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-12 col-xs-12">
-									<input type="text" th:field="${curso.nome}" required="required" 
+									<input type="text" th:field="${modulo.nome}" required="required" 
 									class="form-control col-md-6 col-xs-12">
 								</div>
 							</div>
@@ -79,18 +89,20 @@
 							<thead>
 								<tr>
 									<th width="15%">Código</th>
-									<th width="80%">Nome</th>
+									<th width="40%">Nome</th>
+									<th width="40%">Bloco</th>
 									<th width="5%">Opções</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="curso : ${cursos}">
-									<td th:text="${curso.codigo}"></td>
-									<td th:text="${curso.nome}"></td>
+								<tr th:each="modulo : ${modulos}">
+									<td th:text="${modulo.codigo}"></td>
+									<td th:text="${modulo.nome}"></td>
+									<td th:text="${modulo.bloco.nome}"></td>
 									<td>
 										<div class="btn-group  btn-group-xs">
-					                        <a th:href="@{/curso/edit/{id}(id=${curso.id})}" class="btn btn-warning btn-xs"><i title="Editar" class="fa fa-pencil"></i></a>
-					                        <a th:href="@{/curso/delete/{id}(id=${curso.id})}" class="btn btn-danger btn-xs"><i title="Excluir" class="fa fa-trash"></i></a>
+					                        <a th:href="@{/modulo/edit/{id}(id=${modulo.id})}" class="btn btn-warning btn-xs"><i title="Editar" class="fa fa-pencil"></i></a>
+					                        <a th:href="@{/modulo/delete/{id}(id=${modulo.id})}" class="btn btn-danger btn-xs"><i title="Excluir" class="fa fa-trash"></i></a>
 				                      	</div>
 									</td>
 								</tr>
@@ -105,7 +117,27 @@
 </div>
 <th:block layout:fragment="scripts">
 	<!-- Datatables -->
-   <script src="/template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-   <script src="/template/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+	<script src="/template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="/template/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+   	<!-- jQuery autocomplete -->
+	<script src="/template/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+	<script>
+		$('#blocoAutoComplete').autocomplete({
+			serviceUrl: '/bloco/list/getByNameStartingWith',
+			dataType: 'json',
+			suggestions: true,
+			transformResult: function(response) {
+		        return {
+		            suggestions: $.map(response, function(item) {
+		                return { value: item.nome, data: item.id };
+		            })
+		        };
+		    },
+		    onSelect : function (suggestion) {
+		    	$("#blocoId").val(suggestion.data);
+		    }
+		});
+	 </script>
+
 </th:block>
 </html>
