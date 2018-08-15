@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Professor implements Serializable {
 
@@ -24,6 +26,7 @@ public class Professor implements Serializable {
 
 	private String nome;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "professor")
 	private List<Turma> turmas;
 
