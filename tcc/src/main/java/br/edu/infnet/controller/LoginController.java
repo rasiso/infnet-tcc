@@ -67,7 +67,7 @@ public class LoginController {
 		System.out.println(usuario.getPassword());
 		modelAndView.addObject("UsuarioName", "Benvindo " + usuario.getNome() + " (" + usuario.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Conteudo somente para usuarios do grupo admin");
-		modelAndView.setViewName("main");
+		modelAndView.setViewName("mainTemplate");
 		return modelAndView;
 	}
 	
