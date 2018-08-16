@@ -3,13 +3,18 @@ package br.edu.infnet.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.NaturalId;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Bloco implements Serializable {
@@ -24,9 +29,14 @@ public class Bloco implements Serializable {
 	private String codigo;
 
 	private String nome;
+	
+	@JsonIgnore
+	@ManyToOne
+    @JoinColumn(name = "curso_id")
+	private Curso curso;
 
-	@OneToMany
-	@JoinColumn(name = "id_bloco")
+	@JsonIgnore
+	@OneToMany(mappedBy = "bloco", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Modulo> modulos;
 
 	public Long getId() {
@@ -59,6 +69,14 @@ public class Bloco implements Serializable {
 
 	public void setModulos(List<Modulo> modulos) {
 		this.modulos = modulos;
+	}
+	
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 	@Override

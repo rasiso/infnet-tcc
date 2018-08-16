@@ -6,9 +6,13 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.NaturalId;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Modulo implements Serializable {
@@ -23,7 +27,13 @@ public class Modulo implements Serializable {
 	private String codigo;
 
 	private String nome;
-
+	
+	@JsonIgnore
+	@ManyToOne
+    @JoinColumn(name = "bloco_id")
+	private Bloco bloco;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "modulo")
 	private List<Turma> turmas;
 
@@ -57,6 +67,14 @@ public class Modulo implements Serializable {
 
 	public void setTurmas(List<Turma> turmas) {
 		this.turmas = turmas;
+	}
+	
+	public Bloco getBloco() {
+		return bloco;
+	}
+
+	public void setBloco(Bloco bloco) {
+		this.bloco = bloco;
 	}
 
 	@Override
