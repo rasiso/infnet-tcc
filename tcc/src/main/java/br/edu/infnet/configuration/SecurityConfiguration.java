@@ -47,6 +47,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			authorizeRequests()
 				.antMatchers("/").permitAll()
 				.antMatchers("/login").permitAll()
+				
+				//.antMatchers("/turmaMain").access("hasRole('ADMIN') or hasRole('USUARIO')")
+				.antMatchers("/turmaMain").access("hasRole('ADMIN')")
+				
 				.antMatchers("/registration").permitAll()
 				.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
 				.authenticated().and().csrf().disable().formLogin()
