@@ -13,7 +13,11 @@ import br.edu.infnet.repository.CursoRepository;
 import br.edu.infnet.service.UsuarioService;
 
 @Controller
+<<<<<<< HEAD
 //@RequestMapping("/main")
+=======
+@RequestMapping("/")
+>>>>>>> branch 'master' of https://github.com/rasiso/infnet-tcc.git
 public class MainController {
 
 	@Autowired
