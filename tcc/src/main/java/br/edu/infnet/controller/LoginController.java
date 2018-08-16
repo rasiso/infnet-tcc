@@ -81,12 +81,9 @@ public class LoginController {
 	
 	}*/
 
-	@RequestMapping(value={"/", "/turma"}, method = RequestMethod.GET)
-	public ModelAndView turma(){
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("turma");
-		return modelAndView;
-	}
-	
+	  @GetMapping("/turma")
+	    public String about() {
+	        return "/turma";
+	    }	
 
 }
