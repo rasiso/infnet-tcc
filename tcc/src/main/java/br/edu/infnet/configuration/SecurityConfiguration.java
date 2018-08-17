@@ -38,6 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authoritiesByUsernameQuery(rolesQuery)
 				.dataSource(dataSource)
 				.passwordEncoder(bCryptPasswordEncoder);
+		System.out.println(rolesQuery);
+		
 	}
 
 	@Override
@@ -47,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			authorizeRequests()
 			    .antMatchers("/").permitAll()
 			    .antMatchers("/login").permitAll()	
-			    .antMatchers("/turma/**").hasAnyRole("ADMIN")
+			    .antMatchers("/turma/**").access("hasRole('ROLE_ADMIN')")
 			    .antMatchers("/registration").permitAll()
 			    .antMatchers("/admin/**").hasAuthority("ADMIN")
 	            .anyRequest().authenticated()
@@ -60,7 +62,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and().exceptionHandling()
-				.accessDeniedPage("/access-denied");
+				.accessDeniedPage("/access-denied")
+		        .and().exceptionHandling().accessDeniedPage("/403")
+		        .and().csrf();
 	}
 	
 	@Override
