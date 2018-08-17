@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.edu.infnet.model.CustomUserDetail;
 import br.edu.infnet.model.Usuario;
 import br.edu.infnet.service.UsuarioService;
 
@@ -104,10 +105,10 @@ public class LoginController {
 			//checa se ususuario esta  logado
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			if (!(auth instanceof AnonymousAuthenticationToken)) {
-				Usuario userDetail = (Usuario) auth.getPrincipal();
+				CustomUserDetail userDetail = (CustomUserDetail) auth.getPrincipal();
 				System.out.println(userDetail);
 			
-				model.addObject("username", userDetail.getNome());
+				model.addObject("username", userDetail.getusuario().getNome());
 				
 			}
 			
