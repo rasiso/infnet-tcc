@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>403 - acesso negado</title>
+</head>
+<body>
+	<h1>HTTP Status 403 - Accesso negado</h1>
+	<th:choose>
+		<th:when test="${empty username}">
+			<h2>Voce não tem permissão para acessar  esta pagina!</h2>
+		</th:when>
+		<th:otherwise>
+			<h2>Username : ${username} <br/>Voce não tem permissão para acessar  esta pagina!</h2>
+		</th:otherwise>
+	</th:choose>
+</body>
+</html>
+
