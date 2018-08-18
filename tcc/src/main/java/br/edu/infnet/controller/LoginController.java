@@ -78,7 +78,7 @@ public class LoginController {
 	 * }
 	 */
 
-	@RequestMapping(value = "/turma**", method = RequestMethod.GET)
+	@RequestMapping(value = "/turma", method = RequestMethod.GET)
 	public ModelAndView adminPage() {
 
 		ModelAndView model = new ModelAndView();
