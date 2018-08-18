@@ -20,13 +20,13 @@ public class Role implements Serializable {
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="descricao")
-	private String descricao;
+	@Column(name="role")
+	private String role;
 	
 	public Role() {};
     
-	public Role(String descricao) {
-        this.descricao = descricao;
+	public Role(String role) {
+        this.role = role;
     }
 	
 	public Long getId() {
@@ -35,22 +35,22 @@ public class Role implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao=descricao;
+	public void setrole(String role) {
+		this.role=role;
 	}
 	
-	public String getDescricao() {
-		return descricao;
+	public String getrole() {
+		return role;
 	}
-	public void setRole(String descricao) {
-		this.descricao = descricao;
+	public void setRole(String role) {
+		this.role = role;
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		return result;
 	}
 	@Override
@@ -67,10 +67,10 @@ public class Role implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
+		if (role == null) {
+			if (other.role != null)
 				return false;
-		} else if (!descricao.equals(other.descricao))
+		} else if (!role.equals(other.role))
 			return false;
 		return true;
 	}
