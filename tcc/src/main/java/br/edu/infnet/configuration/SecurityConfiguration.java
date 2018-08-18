@@ -46,24 +46,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		  http.authorizeRequests()
 	          .antMatchers("/login","/").permitAll();
+		  
 		  http.authorizeRequests()
-			    .antMatchers("/turma").hasRole("ADMIN");
+			    .antMatchers("/turma").hasRole("ADMIN")
+			    .and()
+				.exceptionHandling().accessDeniedPage("/403");
 		  
 		
 		http.
 			authorizeRequests()
 		        .anyRequest().authenticated()
-				//.antMatchers("/turmaMain").access("hasRole('ADMIN') or hasRole('USUARIO')")
 				.and().csrf().disable()
 				.formLogin().loginPage("/login").failureUrl("/login?error=true")
 				.defaultSuccessUrl("/main")
 				.usernameParameter("email")
 				.passwordParameter("password")
-				.and().logout()
+				.and()
+				.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and().exceptionHandling()
-				.accessDeniedPage("/access-denied")
-		        .and().exceptionHandling().accessDeniedPage("/403")
 		        .and().csrf();
 	}
 	
