@@ -47,12 +47,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		  http.authorizeRequests()
 	          .antMatchers("/login","/").permitAll();
 		  http.authorizeRequests()
-			    .antMatchers("/turma").hasRole("ADMIN").anyRequest();
+			    .antMatchers("/turma").hasRole("ADMIN");
 		  
 		
 		http.
 			authorizeRequests()
-		        .antMatchers("/admin").hasAuthority("ADMIN").anyRequest()
+		        .antMatchers("/admin").hasRole("ADMIN").anyRequest()
 	            .authenticated()
 				//.antMatchers("/turmaMain").access("hasRole('ADMIN') or hasRole('USUARIO')")
 				.and().csrf().disable()
