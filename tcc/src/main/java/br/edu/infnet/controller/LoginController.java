@@ -97,9 +97,14 @@ public class LoginController {
 		// checa se ususuario esta logado
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (!(auth instanceof AnonymousAuthenticationToken)) {
-			User userDetail = (User) auth.getPrincipal();
-			System.out.println(userDetail);
-			model.addObject("username", userDetail.getName());
+			//User userDetail = (User) auth.getPrincipal();
+			
+			Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+			String username = loggedInUser.getName();
+			
+			
+			System.out.println(username);
+			model.addObject("username", username);
 
 		}
 
