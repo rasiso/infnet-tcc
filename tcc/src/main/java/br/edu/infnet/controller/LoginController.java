@@ -78,7 +78,7 @@ public class LoginController {
 	 * }
 	 */
 
-	@RequestMapping(value = "/turma", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/turma", method = RequestMethod.GET)
 	public ModelAndView adminPage() {
 
 		ModelAndView model = new ModelAndView();
@@ -88,7 +88,7 @@ public class LoginController {
 
 		return model;
 
-	}
+	}*/
 
 	// for 403 access denied page
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
