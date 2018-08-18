@@ -50,10 +50,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		  http.authorizeRequests()
 			    .antMatchers("/turma").hasRole("ADMIN")
 			    .and()
+			    .csrf().disable()
 				.exceptionHandling().accessDeniedPage("/403");
 		  
 		
-		http.
+		/* http.
 			authorizeRequests()
 		        .anyRequest().authenticated()
 				.and().csrf().disable()
@@ -65,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and().exceptionHandling()
-		        .and().csrf();
+		        .and(); */
 	}
 	
 	@Override
