@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.infnet.model.Curso;
 import br.edu.infnet.repository.CursoRepository;
-import br.edu.infnet.service.UsuarioService;
+import br.edu.infnet.service.UserService;
 
 @Controller
 //@RequestMapping("/main")

@@ -12,76 +12,72 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.edu.infnet.model.CustomUserDetail;
-import br.edu.infnet.model.Usuario;
-import br.edu.infnet.service.UsuarioService;
-
+import br.edu.infnet.model.User;
+import br.edu.infnet.service.UserService;
 
 @Controller
 public class LoginController {
-	
-	@Autowired
-	private UsuarioService  usuarioServiceImpl;
 
-	@RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
-	public ModelAndView login(){
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
+	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	
-	
-	@RequestMapping(value="/registration", method = RequestMethod.GET)
-	public ModelAndView registration(){
+
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
-		Usuario Usuario = new Usuario();
+		User Usuario = new User();
 		modelAndView.addObject("Usuario", Usuario);
 		modelAndView.setViewName("registration");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUsuario(@Valid Usuario usuario, BindingResult bindingResult) {
+	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
-		Usuario UsuarioExists = usuarioServiceImpl.findUserByEmail(usuario.getEmail());
-		if (UsuarioExists != null) {
-			bindingResult
-					.rejectValue("email", "error.Usuario",
-							"Já existe um usuário cadastrado no email fornecido");
+		User userExists = userService.findUserByEmail(user.getEmail());
+		if (userExists != null) {
+			bindingResult.rejectValue("email", "error.Usuario", "Já existe um usuário cadastrado no email fornecido");
 		}
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("registro");
 		} else {
-			usuarioServiceImpl.saveUser(usuario);
+			userService.saveUser(user);
 			modelAndView.addObject("successMessage", "Usuario registrado com sucesso");
-			modelAndView.addObject("Usuario", new Usuario());
+			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("registration");
-			
+
 		}
 		return modelAndView;
 	}
-	
-	@RequestMapping(value="/main", method = RequestMethod.GET)
-	public ModelAndView home(){
+
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public ModelAndView home() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Usuario usuario = usuarioServiceImpl.findUserByEmail(auth.getName());
-		System.out.println(usuario.getPassword());
-		modelAndView.addObject("UsuarioName", "Benvindo " + usuario.getNome() + " (" + usuario.getEmail() + ")");
-		modelAndView.addObject("adminMessage","Conteudo somente para usuarios do grupo admin");
+		User user = userService.findUserByEmail(auth.getName());
+		System.out.println(user.getPassword());
+		modelAndView.addObject("UsuarioName", "Benvindo " + user.getName() + " (" + user.getEmail() + ")");
+		modelAndView.addObject("adminMessage", "Conteudo somente para usuarios do grupo admin");
 		modelAndView.setViewName("main");
 		return modelAndView;
 	}
-	
-	/*@RequestMapping(value="/main", method = RequestMethod.GET)
-	public ModelAndView listar() {
-		
-		ModelAndView mav = new ModelAndView("main");
-		//mav.addObject("main", this.cursoRepository.findAll()).addObject(new Curso());
-		return mav;
-	
-	}*/
-	
+
+	/*
+	 * @RequestMapping(value="/main", method = RequestMethod.GET) public
+	 * ModelAndView listar() {
+	 * 
+	 * ModelAndView mav = new ModelAndView("main"); //mav.addObject("main",
+	 * this.cursoRepository.findAll()).addObject(new Curso()); return mav;
+	 * 
+	 * }
+	 */
+
 	@RequestMapping(value = "/turma**", method = RequestMethod.GET)
 	public ModelAndView adminPage() {
 
@@ -93,29 +89,23 @@ public class LoginController {
 		return model;
 
 	}
-	
-	
-	
-	//for 403 access denied page
-		@RequestMapping(value = "/403", method = RequestMethod.GET)
-		public ModelAndView accesssDenied() {
 
-			ModelAndView model = new ModelAndView();
-			
-			//checa se ususuario esta  logado
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			if (!(auth instanceof AnonymousAuthenticationToken)) {
-				CustomUserDetail userDetail = (CustomUserDetail) auth.getPrincipal();
-				System.out.println(userDetail);
-			
-				model.addObject("username", userDetail.getusuario().getNome());
-				
-			}
-			
-			model.setViewName("403");
-			return model;
+	// for 403 access denied page
+	@RequestMapping(value = "/403", method = RequestMethod.GET)
+	public ModelAndView accesssDenied() {
+		ModelAndView model = new ModelAndView();
+		// checa se ususuario esta logado
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (!(auth instanceof AnonymousAuthenticationToken)) {
+			User userDetail = (User) auth.getPrincipal();
+			System.out.println(userDetail);
+			model.addObject("username", userDetail.getName());
 
 		}
 
+		model.setViewName("403");
+		return model;
+
+	}
 
 }
