@@ -48,7 +48,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	          .antMatchers("/login","/").permitAll();
 		  
 		  http.authorizeRequests()
-			    .antMatchers("/turma").permitAll()
+			    .antMatchers("/turma").hasRole("|ROLE_ADMIN")
 			    .and()
 			    .csrf().disable()
 				.exceptionHandling().accessDeniedPage("/403");
