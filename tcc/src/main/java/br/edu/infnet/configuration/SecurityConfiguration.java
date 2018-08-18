@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		http.
 			authorizeRequests()
-			    .antMatchers("/turma").access("hasRole('ADMIN')")
+			    .antMatchers("/turma").hasRole("ADMIN")
 			    .antMatchers("/").permitAll()
 			    .antMatchers("/login").permitAll()	
 			    .antMatchers("/registration").permitAll()
