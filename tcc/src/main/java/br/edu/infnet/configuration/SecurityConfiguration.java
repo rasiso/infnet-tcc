@@ -44,9 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/turma/**")
-		.access("hasRole('ADMIN')").and().formLogin()
-		.loginPage("/login").failureUrl("/login?error")
+		http.authorizeRequests().antMatchers("/turma").hasRole("ADMIN")
+		.and().formLogin().loginPage("/login").failureUrl("/login?error")
 		.usernameParameter("email")
 		.passwordParameter("password")
 		.and().logout().logoutSuccessUrl("/login?logout")
