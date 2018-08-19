@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 //@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @SpringBootApplication
-@ComponentScan(basePackages = "br.ude.infnet.service") 
+@ComponentScan(basePackages = {"br.edu.infnet.service","br.edu.infnet.controller"}) 
 public class TccApplication {
 
 	public static void main(String[] args) {
