@@ -44,22 +44,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.
-	     authorizeRequests()
-	     .anyRequest().authenticated()
-			.antMatchers("/").permitAll()
-			.antMatchers("/login").permitAll()
-			.antMatchers("/registration").permitAll()
-			.antMatchers("/turma").hasAuthority("ADMIN").anyRequest()
-			.authenticated().and().csrf().disable()
-			.formLogin().loginPage("/login").failureUrl("/login?error=true")
-			.defaultSuccessUrl("/home")
-			.usernameParameter("email")
-			.passwordParameter("password")
-			.and().logout()
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/").and().exceptionHandling()
-			.accessDeniedPage("/access-denied");
+
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/main", "/about").permitAll()
+                .antMatchers("/turma").hasAnyRole("ADMIN")
+                .antMatchers("/bloco").hasAnyRole("USER")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/403");
 	}
 	
 	@Override
