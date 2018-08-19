@@ -48,15 +48,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
         .authorizeRequests()
             .antMatchers("/login").permitAll()
+            .antMatchers("/").permitAll()
             .antMatchers("/turma").hasRole("ADMIN")
             .anyRequest().authenticated()
             .and()
-            .formLogin().loginPage("/login").defaultSuccessUrl("/main",true)
+            .formLogin().loginPage("/login").usernameParameter("email")
+            .passwordParameter("password1")
+            .defaultSuccessUrl("/main",true)
             .permitAll()
             .and()
             .logout()
             .permitAll();
-    http.exceptionHandling().accessDeniedPage("/403");
+            http.exceptionHandling().accessDeniedPage("/403");
 	}
 	
 	@Override
