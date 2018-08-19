@@ -45,14 +45,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		  http.authorizeRequests()
-	          .antMatchers("/login","/").permitAll(); 
-
-		  http.authorizeRequests().anyRequest().authenticated().and().csrf().disable()
-		       .formLogin().loginPage("/login").failureUrl("/login?error=true")
-  			   .defaultSuccessUrl("/main");
+	          .antMatchers("/main","/").permitAll(); 
 		  
 		  http.authorizeRequests().antMatchers("/turma").hasRole("ADMIN");
-			   
+
+		  http.authorizeRequests().anyRequest().authenticated().and().csrf().disable()
+	       .formLogin().loginPage("/login").failureUrl("/login?error=true")
+			   .defaultSuccessUrl("/main");
 				
 		  http.exceptionHandling().accessDeniedPage("/403");	    
 		
