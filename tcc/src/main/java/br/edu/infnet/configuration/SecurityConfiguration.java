@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/turma/**")
 		.access("hasRole('ADMIN')").and().formLogin()
 		.loginPage("/login").failureUrl("/login?error")
-		.usernameParameter("username")
+		.usernameParameter("email")
 		.passwordParameter("password")
 		.and().logout().logoutSuccessUrl("/login?logout")
 		.and().csrf().disable()
