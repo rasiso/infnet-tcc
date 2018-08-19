@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		  
 		  http.authorizeRequests().antMatchers("/turma").hasRole("ADMIN");
 
-		  http.authorizeRequests().anyRequest().authenticated().and().csrf().disable()
+		  http.authorizeRequests().and()
 	       .formLogin().loginPage("/login").failureUrl("/login?error=true")
 			   .defaultSuccessUrl("/main");
 				
