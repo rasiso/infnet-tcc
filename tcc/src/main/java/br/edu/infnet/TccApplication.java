@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 //@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@ComponentScan({"br.edu.infnet.controller","br.edu.infnet.service","br.edu.infnet.repository"})
 @SpringBootApplication
 public class TccApplication {
 
