@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -36,8 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
-		auth.
-			jdbcAuthentication()
+		auth.jdbcAuthentication()
 				.usersByUsernameQuery(usersQuery)
 				.authoritiesByUsernameQuery(rolesQuery)
 				.dataSource(dataSource)
@@ -49,20 +49,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http
-        .authorizeRequests().anyRequest().authenticated()
-            .antMatchers("/login**").permitAll()
-            .antMatchers("/turma").hasRole("ADMIN")
-            .anyRequest().authenticated()
-            .and().formLogin().loginPage("/login").usernameParameter("email")
-            .passwordParameter("password")
-            .defaultSuccessUrl("/main",true)
-            .permitAll()
-            .and()
-            .logout()
-            .permitAll()
-            .and()
-            .csrf().disable();
+		http.
+		authorizeRequests()
+			.antMatchers("/").permitAll()
+			.antMatchers("/login").permitAll()
+			.antMatchers("/turma").hasAuthority("ADMIN").anyRequest()
+			.authenticated().and().csrf().disable().formLogin()
+			.loginPage("/login").failureUrl("/login?error=true")
+			.defaultSuccessUrl("/main")
+			.usernameParameter("email")
+			.passwordParameter("password")
+			.and().logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logoutSuccessUrl("/").and().exceptionHandling()
+			.accessDeniedPage("/access-denied");
+	
             http.exceptionHandling().accessDeniedPage("/403");
 	}
 	
