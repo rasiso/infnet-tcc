@@ -44,8 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		  http.authorizeRequests()
-	          .antMatchers("/main","/").permitAll(); 
+		  //http.authorizeRequests()
+	      //    .antMatchers("/main","/").permitAll(); 
 		  
 		  http.authorizeRequests().antMatchers("/turma").hasRole("ADMIN");
 
