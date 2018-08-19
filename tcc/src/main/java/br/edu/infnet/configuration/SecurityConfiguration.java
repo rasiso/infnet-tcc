@@ -22,18 +22,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		return bCryptPasswordEncoder;
+	}
+	
 	@Value("${spring.queries.users-query}")
 	private String usersQuery;
 	
 	@Value("${spring.queries.roles-query}")
 	private String rolesQuery;
-
-	
-	@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-	
 	
 	
 	@Override
@@ -65,8 +64,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/").and().exceptionHandling()
 			.accessDeniedPage("/403");
-	
-            http.exceptionHandling().accessDeniedPage("/403");
 	}
 	
 	@Override
