@@ -12,7 +12,7 @@ import br.edu.infnet.model.Curso;
 import br.edu.infnet.repository.CursoRepository;
 import br.edu.infnet.service.UserService;
 
-@Controller
+//@Controller
 //@RequestMapping("/main")
 //@RequestMapping("/")
 public class MainController {
