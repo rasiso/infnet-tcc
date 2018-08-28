@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    continueOnError: true
+org:
+  quartz:
+    scheduler:
+      instanceName: batch
+      instanceId: AUTO
+    threadPool:
+      threadCount: 1
+job:
+  startDelay: 0
+  repeatInterval: 60000
+  description: Agendador para envio de emails
+  key: BatchJob
