@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,6 +22,12 @@ public class Avaliacao implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@Column(name="convite_enviado")
+	private Boolean conviteEnviado;
+	
+	@Column(name="respondida")
+	private Boolean respondida;
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "id_aluno")
@@ -92,14 +99,32 @@ public class Avaliacao implements Serializable {
 		return serialVersionUID;
 	}
 
+	public Boolean getConviteEnviado() {
+		return conviteEnviado;
+	}
+
+	public void setConviteEnviado(Boolean conviteEnviado) {
+		this.conviteEnviado = conviteEnviado;
+	}
+
+	public Boolean getRespondida() {
+		return respondida;
+	}
+
+	public void setRespondida(Boolean respondida) {
+		this.respondida = respondida;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((conviteEnviado == null) ? 0 : conviteEnviado.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((inicio == null) ? 0 : inicio.hashCode());
 		result = prime * result + ((modelo == null) ? 0 : modelo.hashCode());
 		result = prime * result + ((respondente == null) ? 0 : respondente.hashCode());
+		result = prime * result + ((respondida == null) ? 0 : respondida.hashCode());
 		result = prime * result + ((termino == null) ? 0 : termino.hashCode());
 		result = prime * result + ((turma == null) ? 0 : turma.hashCode());
 		return result;
@@ -114,6 +139,11 @@ public class Avaliacao implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Avaliacao other = (Avaliacao) obj;
+		if (conviteEnviado == null) {
+			if (other.conviteEnviado != null)
+				return false;
+		} else if (!conviteEnviado.equals(other.conviteEnviado))
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -134,6 +164,11 @@ public class Avaliacao implements Serializable {
 				return false;
 		} else if (!respondente.equals(other.respondente))
 			return false;
+		if (respondida == null) {
+			if (other.respondida != null)
+				return false;
+		} else if (!respondida.equals(other.respondida))
+			return false;
 		if (termino == null) {
 			if (other.termino != null)
 				return false;
@@ -146,6 +181,8 @@ public class Avaliacao implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 	
 }

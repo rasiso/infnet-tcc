@@ -29,7 +29,7 @@ public class Resposta implements Serializable {
 	@JoinColumn(name = "id_aluno")
 	private Aluno aluno;
 
-	private Resposta resposta;
+	private Integer resposta;
 
 	public Long getId() {
 		return id;
@@ -63,11 +63,11 @@ public class Resposta implements Serializable {
 		this.aluno = aluno;
 	}
 
-	public Resposta getResposta() {
+	public Integer getResposta() {
 		return resposta;
 	}
 
-	public void setResposta(Resposta resposta) {
+	public void setResposta(Integer resposta) {
 		this.resposta = resposta;
 	}
 

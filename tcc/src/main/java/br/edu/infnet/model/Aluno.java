@@ -24,9 +24,7 @@ public class Aluno implements Serializable {
 
 	private String nome;
 
-	private String email;
-
-	private Boolean repetente;
+	private String email;	
 
 	@ManyToMany(mappedBy = "alunos")
 	private List<Turma> turmas;
@@ -63,12 +61,12 @@ public class Aluno implements Serializable {
 		this.email = email;
 	}
 
-	public Boolean isRepetente() {
-		return repetente;
+	public List<Turma> getTurmas() {
+		return turmas;
 	}
 
-	public void setRepetente(Boolean repetente) {
-		this.repetente = repetente;
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
 	}
 
 	@Override
@@ -79,7 +77,6 @@ public class Aluno implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((repetente == null) ? 0 : repetente.hashCode());
 		result = prime * result + ((turmas == null) ? 0 : turmas.hashCode());
 		return result;
 	}
@@ -113,11 +110,6 @@ public class Aluno implements Serializable {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (repetente == null) {
-			if (other.repetente != null)
-				return false;
-		} else if (!repetente.equals(other.repetente))
-			return false;
 		if (turmas == null) {
 			if (other.turmas != null)
 				return false;
@@ -125,5 +117,9 @@ public class Aluno implements Serializable {
 			return false;
 		return true;
 	}
+
+	
+
+	
 
 }
