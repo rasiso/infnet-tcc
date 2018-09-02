@@ -182,6 +182,13 @@ public class Avaliacao implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Avaliacao [id=" + id + ", conviteEnviado=" + conviteEnviado + ", respondida=" + respondida
+				+ ", respondente=" + respondente + ", modelo=" + modelo + ", inicio=" + inicio + ", termino=" + termino
+				+ ", turma=" + turma + "]";
+	}
+
 	
 
 	
