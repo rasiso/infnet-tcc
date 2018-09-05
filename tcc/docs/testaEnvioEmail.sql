@@ -5,6 +5,5 @@ INSERT INTO professor  VALUES (1,"P20180901121300","Professor da Silva");
 INSERT INTO aluno  VALUES (1,"walter.almeida@al.infnet.edu.br","A20180901121500","Walter Almeida","Masculino");
 INSERT INTO turma  VALUES (1,"T20180901121300","2018-07-20","2018-09-09",1,1);
 INSERT INTO turma_x_aluno  VALUES (1,1);
-INSERT INTO turma  VALUES (1,"T20180901121300","2018-07-20","2018-09-09",1,1);
 INSERT INTO modelo_avaliacao  VALUES (1,"Infnet - Avaliação da Disciplina - Projeto de Bloco","Q20180901121300","Avalie a Disciplina Projeto de Bloco \nLink - clique aqui","Avaliar a Disciplina");
 INSERT INTO avaliacao  VALUES (1,"2018-09-02","2018-09-22",1,1,1,0,0);
