@@ -3,7 +3,10 @@ package br.edu.infnet.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -11,6 +14,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.NaturalId;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.edu.infnet.enumerations.Sexo;
 
 @Entity
 public class Professor implements Serializable {
@@ -25,6 +30,10 @@ public class Professor implements Serializable {
 	private String matricula;
 
 	private String nome;
+	
+	@Column(name = "sexo", length=9)
+	@Enumerated(EnumType.STRING)
+	private Sexo sexo;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "professor")
@@ -52,6 +61,14 @@ public class Professor implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public Sexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Sexo sexo) {
+		this.sexo = sexo;
 	}
 
 	public List<Turma> getTurmas() {

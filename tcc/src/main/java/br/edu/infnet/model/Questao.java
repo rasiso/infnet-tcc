@@ -6,10 +6,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.NaturalId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Questao implements Serializable {
@@ -20,14 +22,17 @@ public class Questao implements Serializable {
 	@GeneratedValue
 	private Long id;
 
-	@NaturalId
-	private String codigo;
-
 	@Lob
-	private String cabecalho;
+	private String enunciado;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "questoes")
 	private List<ModeloAvaliacao> modelosAvaliacoes;
+	
+	@JsonIgnore
+	@ManyToOne
+    @JoinColumn(name = "categoria_id")
+	private CategoriaQuestao categoria;
 
 	public Long getId() {
 		return id;
@@ -37,20 +42,12 @@ public class Questao implements Serializable {
 		this.id = id;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public String getEnunciado() {
+		return enunciado;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getCabecalho() {
-		return cabecalho;
-	}
-
-	public void setCabecalho(String cabecalho) {
-		this.cabecalho = cabecalho;
+	public void setEnunciado(String enunciado) {
+		this.enunciado = enunciado;
 	}
 
 	public List<ModeloAvaliacao> getModelosAvaliacoes() {
@@ -61,12 +58,24 @@ public class Questao implements Serializable {
 		this.modelosAvaliacoes = modelosAvaliacoes;
 	}
 
+	public CategoriaQuestao getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(CategoriaQuestao categoria) {
+		this.categoria = categoria;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cabecalho == null) ? 0 : cabecalho.hashCode());
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
+		result = prime * result + ((enunciado == null) ? 0 : enunciado.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((modelosAvaliacoes == null) ? 0 : modelosAvaliacoes.hashCode());
 		return result;
@@ -81,15 +90,15 @@ public class Questao implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Questao other = (Questao) obj;
-		if (cabecalho == null) {
-			if (other.cabecalho != null)
+		if (categoria == null) {
+			if (other.categoria != null)
 				return false;
-		} else if (!cabecalho.equals(other.cabecalho))
+		} else if (!categoria.equals(other.categoria))
 			return false;
-		if (codigo == null) {
-			if (other.codigo != null)
+		if (enunciado == null) {
+			if (other.enunciado != null)
 				return false;
-		} else if (!codigo.equals(other.codigo))
+		} else if (!enunciado.equals(other.enunciado))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -103,5 +112,7 @@ public class Questao implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 }

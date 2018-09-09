@@ -2,6 +2,7 @@ package br.edu.infnet.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.edu.infnet.model.Aluno;
 import br.edu.infnet.model.Professor;
 import br.edu.infnet.repository.ProfessorRepository;
 
@@ -28,15 +30,18 @@ public class ProfessorController {
 	public ModelAndView listar() {
 		ModelAndView mav = new ModelAndView("professorMain");
 		mav.addObject(new Professor());
-		mav.addObject("professors", this.professorRepository.findAll());
+		mav.addObject("professorTemp", new Aluno());
+		mav.addObject("professores", this.professorRepository.findAll());
 		return mav;
 	}
 	
 	@GetMapping("/edit/{id}")
 	public ModelAndView getById(@PathVariable long id, ModelMap model) {
 		ModelAndView mav = new ModelAndView("professorMain");
-		mav.addObject("professor", this.professorRepository.findById(id));
-		mav.addObject("professors", this.professorRepository.findAll());
+		Optional<Professor> professor = this.professorRepository.findById(id);
+		professor.ifPresent(obj -> mav.addObject("professorTemp", obj));
+		mav.addObject("professor", professor);
+		mav.addObject("professores", this.professorRepository.findAll());
 		return mav;
 	}
 	

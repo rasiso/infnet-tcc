@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.edu.infnet.enumerations.Sexo;
 
 @Entity
@@ -35,6 +37,7 @@ public class Aluno implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Sexo sexo;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "alunos")
 	private List<Turma> turmas;
 
