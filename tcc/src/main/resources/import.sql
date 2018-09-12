@@ -34,13 +34,16 @@ insert into aluno (id, matricula, sexo, nome, email) values (3, 'ALN003', 'Femin
 insert into aluno (id, matricula, sexo, nome, email) values (4, 'ALN004', 'Masculino', 'Aluno Nome IV' , 'email_aluno@email.com');
 insert into aluno (id, matricula, sexo, nome, email) values (5, 'ALN005', 'Feminino',  'Aluno Nome V'  , 'email_aluno@email.com');
 INSERT INTO aluno (id, matricula, sexo, nome, email) VALUES (6, 'ALN006', 'Masculino', 'Walter Almeida', 'walter.almeida@al.infnet.edu.br');
+INSERT INTO aluno (id, matricula, sexo, nome, email) VALUES (7, 'ALN007', 'Feminino',  'Aluna Hackeada', 'walter.almeida@al.infnet.edu.br');
 
 INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,1);
 INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,2);
 INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,3);
 INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,4);
 INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,5);
-INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,6);
+
+INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (2,6);
+INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (2,7);
 
 
 insert into categoria_questao (id, nome) values (1, 'Categoria 001');
@@ -65,6 +68,9 @@ INSERT INTO user_role (user_id, role_id) VALUES (1, 1), (2, 1);
 
 INSERT INTO modelo_avaliacao (id, codigo, objetivo, assunto_email, mensagem_email)  
 VALUES (1,"Q20180912121300","Avaliar a Disciplina","Infnet - Avaliação da Disciplina - <modulo>",
-"Prezad<(o/a)> <aluno>, \nPor favor, avalie a Disciplina <modulo>! \nLink: <link>");
+"Prezad<o/a> <aluno>, \nPor favor, avalie a Disciplina <modulo>! \nLink: <link>");
+
+
+
 
 

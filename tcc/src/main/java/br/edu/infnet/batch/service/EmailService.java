@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import br.edu.infnet.converters.TagConverter;
 import br.edu.infnet.email.envio.EmailSenderService;
 import br.edu.infnet.model.Avaliacao;
 import br.edu.infnet.model.Mensagem;
@@ -80,8 +81,8 @@ public class EmailService {
 		List<String> destinatarios = new ArrayList<String>();
 		destinatarios.add(avaliacaoPendente.getRespondente().getEmail());
 		
-		String assunto = avaliacaoPendente.getModelo().getAssuntoEmail();
-		String corpo = construirCorpoDaMensagem(avaliacaoPendente.getModelo());
+		String assunto = obterAssuntoEmail(avaliacaoPendente);
+		String corpo = construirCorpoDaMensagem(avaliacaoPendente);
 		
 		return new Mensagem(remetente, destinatarios, assunto, corpo);
 	}
@@ -90,8 +91,14 @@ public class EmailService {
 
 
 
-	private String construirCorpoDaMensagem(ModeloAvaliacao modelo) {		
-		return modelo.getMensagemEmail();
+	private String obterAssuntoEmail(Avaliacao avaliacao) {
+		return new TagConverter().obterTexto(avaliacao, avaliacao.getModelo().getAssuntoEmail());
+	}
+
+
+
+	private String construirCorpoDaMensagem(Avaliacao avaliacao) {		
+		return new TagConverter().obterTexto(avaliacao, avaliacao.getModelo().getMensagemEmail());
 	}
 
 
