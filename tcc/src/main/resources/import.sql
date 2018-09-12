@@ -26,13 +26,22 @@ insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values 
 insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (2, 'TRM002', CURRENT_DATE, CURRENT_DATE, 2, 2); 
 insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (3, 'TRM003', CURRENT_DATE, CURRENT_DATE, 3, 3);
 insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (4, 'TRM004', CURRENT_DATE, CURRENT_DATE, 4, 4); 
-insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (5, 'TRM005', CURRENT_DATE, CURRENT_DATE, 5, 5);  
+insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (5, 'TRM005', CURRENT_DATE, CURRENT_DATE, 5, 5); 
 
 insert into aluno (id, matricula, sexo, nome, email) values (1, 'ALN001', 'Masculino', 'Aluno Nome I'  , 'email_aluno@email.com');
 insert into aluno (id, matricula, sexo, nome, email) values (2, 'ALN002', 'Feminino',  'Aluno Nome II' , 'email_aluno@email.com');
 insert into aluno (id, matricula, sexo, nome, email) values (3, 'ALN003', 'Feminino',  'Aluno Nome III', 'email_aluno@email.com');
 insert into aluno (id, matricula, sexo, nome, email) values (4, 'ALN004', 'Masculino', 'Aluno Nome IV' , 'email_aluno@email.com');
 insert into aluno (id, matricula, sexo, nome, email) values (5, 'ALN005', 'Feminino',  'Aluno Nome V'  , 'email_aluno@email.com');
+INSERT INTO aluno (id, matricula, sexo, nome, email) VALUES (6, 'ALN006', 'Masculino', 'Walter Almeida', 'walter.almeida@al.infnet.edu.br');
+
+INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,1);
+INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,2);
+INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,3);
+INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,4);
+INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,5);
+INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,6);
+
 
 insert into categoria_questao (id, nome) values (1, 'Categoria 001');
 insert into categoria_questao (id, nome) values (2, 'Categoria 002');
@@ -53,3 +62,9 @@ INSERT INTO user (user_id,email, name, last_name,password,active) VALUES (1,'maa
 INSERT INTO user (user_id,email, name, last_name,password,active) values (2,'aluno@infnet.com.br','rafael','', '$2a$10$yAKeqZAXcD93UbtjaWGnju.Xaq/abUPLk7kq/dfdBWV.KgXaOpI5W',1);
 
 INSERT INTO user_role (user_id, role_id) VALUES (1, 1), (2, 1);
+
+INSERT INTO modelo_avaliacao (id, codigo, objetivo, assunto_email, mensagem_email)  
+VALUES (1,"Q20180912121300","Avaliar a Disciplina","Infnet - Avaliação da Disciplina - <modulo>",
+"Prezad<(o/a)> <aluno>, \nPor favor, avalie a Disciplina <modulo>! \nLink: <link>");
+
+

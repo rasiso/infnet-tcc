@@ -97,8 +97,16 @@ public class EmailService {
 
 
 	private List<Avaliacao> obterAvaliacoesPendentes() {
-		List<Avaliacao> avaliacoesPendentes = repositorio.obterAvaliacoesPendentes(new Date());
-		System.out.println(avaliacoesPendentes.toString());
+		
+		List<Avaliacao> avaliacoesPendentes = null;
+		try {
+			avaliacoesPendentes = repositorio.obterAvaliacoesPendentes(new Date());
+			System.out.println(avaliacoesPendentes.toString());
+		} catch (Exception e) {
+			System.out.println("Repositorio da Avaliacao nao esta disponivel.");
+			
+		}
+		
 		return avaliacoesPendentes;
 	}
 
