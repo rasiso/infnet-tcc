@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:th="http://www.thymeleaf.org" 
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+  layout:decorate="~{mainTemplate}">
+
+<head>
+	<title>Alunos</title>
+	<th:block layout:fragment="css">
+	    <!-- Datatables -->
+    	<link href="/template/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    	<!-- iCheck -->
+    	<link href="/template/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+	</th:block>
+</head>
+
+<div layout:fragment="page_content" id="page_content">
+	<div class="">
+		<div class="page-title">
+			<div class="title_left">
+				<h3>
+					Modelos de avaliação <small></small>
+				</h3>
+			</div>
+
+			<div class="title_right">
+				<div
+					class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+					<div class="input-group"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_content">
+						<br />
+						<form id="demo-form2" th:action="@{/modeloAvaliacao}" th:method="post" data-parsley-validate class="form-horizontal form-label-left">
+							<input th:type="hidden" name="id" th:field="${modeloAvaliacao.id}" />
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="first-name">Código <span class="required">*</span>
+								</label>
+								<div class="col-md-2 col-sm-12 col-xs-12">
+									<input type="text" th:field="${modeloAvaliacao.codigo}" required="required"
+										class="form-control col-md-2 col-xs-12">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="last-name">Objetivo <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<input type="text" th:field="${modeloAvaliacao.objetivo}" required="required" 
+									class="form-control col-md-6 col-xs-12">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="last-name">Assunto E-mail <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<input type="text" th:field="${modeloAvaliacao.assuntoEmail}" required="required" 
+									class="form-control col-md-6 col-xs-12">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="last-name">Mensagem E-mail <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<input type="text" th:field="${modeloAvaliacao.mensagemEmail}" required="required" 
+									class="form-control col-md-6 col-xs-12">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="first-name">Buscar questão
+								</label>
+								<div class="col-md-6 col-sm-12 col-xs-12">
+									<input id="questaoAutoComplete" type="text"
+										class="form-control col-md-2 col-xs-12" >
+									<!-- <input th:type="hidden" id="blocoId" th:field="${modeloAvaliacao.bloco.id}" /> -->
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+										for="first-name">Questões selecionadas
+								</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input type="text" id="questoesModelo" th:field="${modeloAvaliacao.questoes}" required="required" />
+										<div class="x_content">
+										    <table id="listaQuestoes" class="table">
+										      <thead>
+										        <tr>
+										          	<th width="99%"></th>
+										          	<th width="1%"></th>
+										        </tr>
+										      </thead>
+										      <tbody>
+										      </tbody>
+										    </table>
+										  </div>
+									</div>
+								</div> 
+							</div>
+							<div class="ln_solid"></div>
+							<div class="form-group">
+								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+									<button class="btn btn-primary" type="button">Cancelar</button>
+									<button class="btn btn-primary" type="reset">Limpar</button>
+									<button type="submit" class="btn btn-success">Salvar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_content">
+						<table id="datatable" class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th width="15%">Código</th>
+									<th width="40%">Objetivo</th>
+									<th width="5%">Opções</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="modeloAvaliacao : ${modelosAvaliacao}">
+									<td th:text="${modeloAvaliacao.codigo}"></td>
+									<td th:text="${modeloAvaliacao.objetivo}"></td>
+									<td>
+										<div class="btn-group  btn-group-xs">
+					                        <a th:href="@{/modeloAvaliacao/edit/{id}(id=${modeloAvaliacao.id})}" class="btn btn-warning btn-xs"><i title="Editar" class="fa fa-pencil"></i></a>
+					                        <a th:href="@{/modeloAvaliacao/delete/{id}(id=${modeloAvaliacao.id})}" class="btn btn-danger btn-xs"><i title="Excluir" class="fa fa-trash"></i></a>
+				                      	</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<th:block layout:fragment="scripts">
+	<!-- Datatables -->
+   	<script src="/template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+   	<script src="/template/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+   	<!-- jQuery autocomplete -->
+	<script src="/template/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+   	<script>
+   		function addRowTable(questaoEnunciado, questaoId){
+   			var rowCode = 
+   				'<tr id="'+questaoId+'">'+
+   							'<td>'+questaoEnunciado+'</td>'+
+   							'<td>'+
+   								'<a onclick="deleteRowTable('+questaoId+')" class="btn btn-danger btn-xs"><i title="Excluir" class="fa fa-trash"></i></a>'+
+   							'</td>'+
+        		'</tr>';
+   			$("#listaQuestoes").append(rowCode);
+   		}
+   		
+   		function deleteRowTable(questaoId){
+   			$("#listaQuestoes #"+questaoId).remove();
+   			$("#questoesModelo").val($("#questoesModelo").val().replace(questaoId,""));
+   		}
+   		
+		$('#questaoAutoComplete').autocomplete({
+			serviceUrl: '/questao/list/getByEnunciadoLike',
+			dataType: 'json',
+			suggestions: true,
+			autoSelectFirst: true,
+			showNoSuggestionNotice: true,
+			transformResult: function(response) {
+		        return {
+		            suggestions: $.map(response, function(item) {
+		                return { value: item.enunciado, data: item.id };
+		            })
+		        };
+		    },
+		    onSelect : function (suggestion) {
+		    	addRowTable(suggestion.value, suggestion.data);
+		    	$("#questoesModelo").val($("#questoesModelo").val()+","+suggestion.data);
+		    	//alert($("#questaoAutoComplete").val());
+		    	$("#questaoAutoComplete").val("");
+		    }
+		});
+	 </script>
+</th:block>
+</html>
