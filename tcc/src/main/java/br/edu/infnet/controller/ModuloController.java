@@ -2,6 +2,7 @@ package br.edu.infnet.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.edu.infnet.model.Bloco;
 import br.edu.infnet.model.Modulo;
 import br.edu.infnet.repository.ModuloRepository;
 
@@ -27,6 +29,13 @@ public class ModuloController {
 	@GetMapping
 	public ModelAndView listar() {
 		ModelAndView mav = new ModelAndView("moduloMain");
+		/* rever esse ponto. Codigo feito para conseguir fazer funcionar o javascript do autocomplete 
+		que tentava acessar o blocoTemp.curso.name e dava erro quando o objeto não existia		
+		*/
+		Modulo modulo = new Modulo();
+		Bloco bloco = new Bloco();
+		modulo.setBloco(bloco);
+		mav.addObject("moduloTemp", modulo);
 		mav.addObject(new Modulo());
 		mav.addObject("modulos", this.moduloRepository.findAll());
 		return mav;
@@ -35,6 +44,8 @@ public class ModuloController {
 	@GetMapping("/edit/{id}")
 	public ModelAndView getById(@PathVariable long id, ModelMap model) {
 		ModelAndView mav = new ModelAndView("moduloMain");
+		Optional<Modulo> modulo = this.moduloRepository.findById(id);
+		modulo.ifPresent(obj -> mav.addObject("moduloTemp", obj));
 		mav.addObject("modulo", this.moduloRepository.findById(id));
 		mav.addObject("modulos", this.moduloRepository.findAll());
 		return mav;

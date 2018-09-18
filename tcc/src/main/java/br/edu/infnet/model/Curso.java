@@ -32,7 +32,7 @@ public class Curso implements Serializable {
 	private String nome;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "curso", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "curso")
 	private List<Bloco> blocos;
 
 	public Long getId() {

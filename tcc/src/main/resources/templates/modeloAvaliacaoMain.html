@@ -72,8 +72,8 @@
 									for="last-name">Mensagem E-mail <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-12 col-xs-12">
-									<input type="text" th:field="${modeloAvaliacao.mensagemEmail}" required="required" 
-									class="form-control col-md-6 col-xs-12">
+									<textarea type="text" th:field="${modeloAvaliacao.mensagemEmail}" required="required" 
+									class="form-control col-md-6 col-xs-12" rows="5"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
@@ -91,7 +91,7 @@
 										for="first-name">Questões selecionadas
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" id="questoesModelo" th:field="${modeloAvaliacao.questoes}" required="required" />
+									<input type="hidden" id="questoesModelo" th:field="${modeloAvaliacao.questoes}" required="required" />
 										<div class="x_content">
 										    <table id="listaQuestoes" class="table">
 										      <thead>
@@ -101,12 +101,17 @@
 										        </tr>
 										      </thead>
 										      <tbody>
+										      	<tr th:id="${questao.id}" th:each="questao : ${modeloAvaliacaoTemp.questoes}">
+													<td th:text="${questao.enunciado}"></td>
+													<td>
+														<a th:onclick="|deleteRowTable('${questao.id}')|" class="btn btn-danger btn-xs"><i title="Excluir" class="fa fa-trash"></i></a>
+													</td>
+												</tr>
 										      </tbody>
 										    </table>
 										  </div>
 									</div>
-								</div> 
-							</div>
+								</div>
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

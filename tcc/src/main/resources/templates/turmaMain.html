@@ -178,6 +178,8 @@
 			serviceUrl: '/professor/list/getByNameStartingWith',
 			dataType: 'json',
 			suggestions: true,
+			autoSelectFirst: true,
+			showNoSuggestionNotice: true,
 			transformResult: function(response) {
 		        return {
 		            suggestions: $.map(response, function(item) {

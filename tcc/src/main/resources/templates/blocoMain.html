@@ -121,11 +121,13 @@
 	<script src="/template/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
    	<!-- jQuery autocomplete -->
 	<script src="/template/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
-	<script>
+	<script th:inline="javascript">
 		$('#cursoAutoComplete').autocomplete({
 			serviceUrl: '/curso/list/getByNameStartingWith',
 			dataType: 'json',
 			suggestions: true,
+			autoSelectFirst: true,
+			showNoSuggestionNotice: true,
 			transformResult: function(response) {
 		        return {
 		            suggestions: $.map(response, function(item) {
@@ -136,7 +138,7 @@
 		    onSelect : function (suggestion) {
 		    	$("#cursoId").val(suggestion.data);
 		    }
-		});
+		}).val(/*[[${blocoTemp.curso.nome}]]*/);
 	 </script>
 
 </th:block>

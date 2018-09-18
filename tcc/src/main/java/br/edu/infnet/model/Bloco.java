@@ -37,7 +37,7 @@ public class Bloco implements Serializable {
 	private Curso curso;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "bloco", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "bloco")
 	private List<Modulo> modulos;
 
 	public Long getId() {
