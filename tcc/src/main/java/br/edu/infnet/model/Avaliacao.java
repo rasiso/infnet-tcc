@@ -3,7 +3,6 @@ package br.edu.infnet.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Avaliacao implements Serializable {
 
@@ -24,13 +25,16 @@ public class Avaliacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column
+	private String codigo;
+	
 	@Column(name="convite_enviado")
 	private Boolean conviteEnviado;
 	
 	@Column(name="respondida")
 	private Boolean respondida;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne	
 	@JoinColumn(name = "id_aluno")
 	private Aluno respondente;
 	
@@ -39,12 +43,14 @@ public class Avaliacao implements Serializable {
 	private ModeloAvaliacao modelo;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy") 
 	private Date inicio;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy") 
 	private Date termino;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "id_turma")
 	private Turma turma;
 
@@ -54,6 +60,14 @@ public class Avaliacao implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public Aluno getRespondente() {

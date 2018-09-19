@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity 
 public class Turma implements Serializable {
 
@@ -44,6 +46,7 @@ public class Turma implements Serializable {
 	@JoinColumn(name = "id_professor")
 	private Professor professor;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "turma")
 	private List<Avaliacao> Avaliacao;
 

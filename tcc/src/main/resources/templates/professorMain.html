@@ -64,11 +64,11 @@
 								</label>
 								
 	                          	<div id="gender" class="btn-group" data-toggle="buttons" style="margin-left: 10px">
-	                            	<label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" th:classappend="${professorTemp.sexo} == 'Masculino' ? 'active'">
-	                              		<input type="radio" th:field="${professor.sexo}" value="Masculino" data-parsley-multiple="gender"> Masculino
+	                            	<label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" th:classappend="${#strings.equalsIgnoreCase(professorTemp.sexo, 'masculino') ? 'active' : ''}">
+	                              		<input type="radio" th:field="${professor.sexo}" value="Masculino" data-parsley-multiple="gender" required="required"> Masculino
 	                            	</label>
-	                            	<label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" th:classappend="${professorTemp.sexo} == 'Feminino' ? 'active'">
-	                              		<input type="radio" th:field="${professor.sexo}" value="Feminino" data-parsley-multiple="gender"> Feminino
+	                            	<label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" th:classappend="${#strings.equalsIgnoreCase(professorTemp.sexo, 'feminino') ? 'active' : ''}">
+	                              		<input type="radio" th:field="${professor.sexo}" value="Feminino" data-parsley-multiple="gender" required="required"> Feminino
 	                            	</label>
 	                          	</div>
 	                        </div>

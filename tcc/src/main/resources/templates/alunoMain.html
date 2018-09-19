@@ -71,13 +71,13 @@
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="last-name">Sexo <span class="required">*</span>
 								</label>
-								
+								<!-- <th:block th:text="${#strings.equalsIgnoreCase(alunoTemp.sexo, 'masculino') ? 'active' : ''}"/> -->
 	                          	<div id="gender" class="btn-group" data-toggle="buttons" style="margin-left: 10px">
-	                            	<label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" th:classappend="${alunoTemp.sexo} == 'M' ? 'active'">
-	                              		<input type="radio" th:field="${aluno.sexo}" value="Masculino" data-parsley-multiple="gender"> Masculino
+	                            	<label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" th:classappend="${#strings.equalsIgnoreCase(alunoTemp.sexo, 'masculino') ? 'active' : ''}">
+	                              		<input type="radio" th:field="${aluno.sexo}" value="Masculino" data-parsley-multiple="gender" required="required"> Masculino
 	                            	</label>
-	                            	<label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" th:classappend="${alunoTemp.sexo} == 'F' ? 'active'">
-	                              		<input type="radio" th:field="${aluno.sexo}" value="Feminino" data-parsley-multiple="gender"> Feminino
+	                            	<label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default" th:classappend="${#strings.equalsIgnoreCase(alunoTemp.sexo, 'feminino') ? 'active' : ''}">
+	                              		<input type="radio" th:field="${aluno.sexo}" value="Feminino" data-parsley-multiple="gender" required="required"> Feminino
 	                            	</label>
 	                          	</div>
 	                        </div>

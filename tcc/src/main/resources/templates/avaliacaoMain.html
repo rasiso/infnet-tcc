@@ -5,7 +5,7 @@
   layout:decorate="~{mainTemplate}">
 
 <head>
-	<title>Turmas</title>
+	<title>Avaliações</title>
 	<th:block layout:fragment="css">
 	    <!-- Datatables -->
     	<link href="/template/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>
-					Turmas <small></small>
+					Avaliações <small></small>
 				</h3>
 			</div>
 
@@ -38,35 +38,35 @@
 				<div class="x_panel">
 					<div class="x_content">
 						<br />
-						<form id="demo-form2" th:action="@{/turma}" th:method="post" data-parsley-validate class="form-horizontal form-label-left">
-							<input th:type="hidden" name="id" th:field="${turma.id}" />
+						<form id="demo-form2" th:action="@{/avaliacao}" th:method="post" data-parsley-validate class="form-horizontal form-label-left">
+							<input th:type="hidden" name="id" th:field="${avaliacao.id}" />
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-1 col-xs-1"
 									for="first-name">Código <span class="required">*</span>
 								</label>
 								<div class="col-md-2 col-sm-1 col-xs-1">
-									<input type="text" th:field="${turma.codigo}" required="required"
+									<input type="text" th:field="${avaliacao.codigo}" required="required"
 										class="form-control col-md-2 col-xs-12">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-1 col-xs-1"
-									for="first-name">Módulo <span class="required">*</span>
+									for="first-name">Turma <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-3 col-xs-1">
-									<input id="moduloAutoComplete" type="text"
+									<input id="turmaAutoComplete" type="text"
 										class="form-control col-md-2 col-xs-12" required="required">
-									<input th:type="hidden" id="moduloId" th:field="${turma.modulo.id}" />
+									<input th:type="hidden" id="modeloTurmaId" th:field="${avaliacao.turma.id}" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-1 col-xs-1"
-									for="first-name">Professor <span class="required">*</span>
+									for="first-name">Modelo avaliação <span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-3 col-xs-1">
-									<input id="professorAutoComplete" type="text"
+									<input id="modeloAvaliacaoAutoComplete" type="text"
 										class="form-control col-md-2 col-xs-12" required="required">
-									<input th:type="hidden" id="professorId" th:field="${turma.professor.id}" />
+									<input th:type="hidden" id="modeloAvaliacaoId" th:field="${avaliacao.modelo.id}" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -79,7 +79,7 @@
 		                               <span class="glyphicon glyphicon-calendar"></span>
 		                            </span>
 		                        </div>
-		                        <input id="dataInicioHidden" th:type="hidden" th:field="${turma.inicio}" class="form-control"  />
+		                        <input id="dataInicioHidden" th:type="hidden" th:field="${avaliacao.inicio}" class="form-control"  />
 								<label class="control-label col-md-3 col-sm-1 col-xs-1"
 									for="last-name" style="margin-right: 10px;">Término<span class="required">*</span>
 								</label>
@@ -89,7 +89,7 @@
 		                               <span class="glyphicon glyphicon-calendar"></span>
 		                            </span>
 		                        </div>
-		                        <input id="dataTerminoHidden" th:type="hidden" th:field="${turma.termino}" class="form-control"  />
+		                        <input id="dataTerminoHidden" th:type="hidden" th:field="${avaliacao.termino}" class="form-control"  />
 							</div>
 							<div class="ln_solid"></div>
 							<div class="form-group">
@@ -114,26 +114,26 @@
 							<thead>
 								<tr>
 									<th width="15%">Código</th>
-									<!-- <th width="50%">Nome</th> -->
-									<th width="30%">Módulo</th>
-									<th width="30%">Professor</th>
+									<th width="15%%">Modelo</th>
+									<th width="30%">Objetivo</th>
+									<th width="15%">Turma</th>
 									<th width="10%">Início</th>
 									<th width="10%">Termino</th>
 									<th width="5%">Opções</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="turma : ${turmas}">
-									<td th:text="${turma.codigo}"></td>
-									<!-- <td th:text="${turma.nome}"></td> -->
-									<td th:text="${turma.modulo.nome}"></td>
-									<td th:text="${turma.professor.nome}"></td>
-									<td th:text="${#dates.format(turma.inicio, 'dd/MM/yyyy')}"></td>
-									<td th:text="${#dates.format(turma.termino, 'dd/MM/yyyy')}"></td>
+								<tr th:each="avaliacao : ${avaliacoes}">
+									<td th:text="${avaliacao.codigo}"></td>
+									<td th:text="${avaliacao.modelo.codigo}"></td>
+									<td th:text="${avaliacao.modelo.objetivo}"></td>
+									<td th:text="${avaliacao.turma.codigo}"></td>
+									<td th:text="${#dates.format(avaliacao.inicio, 'dd/MM/yyyy')}"></td>
+									<td th:text="${#dates.format(avaliacao.termino, 'dd/MM/yyyy')}"></td>
 									<td>
 										<div class="btn-group  btn-group-xs">
-					                        <a th:href="@{/turma/edit/{id}(id=${turma.id})}" class="btn btn-warning btn-xs"><i title="Editar" class="fa fa-pencil"></i></a>
-					                        <a th:href="@{/turma/delete/{id}(id=${turma.id})}" class="btn btn-danger btn-xs"><i title="Excluir" class="fa fa-trash"></i></a>
+					                        <a th:href="@{/avaliacao/edit/{id}(id=${avaliacao.id})}" class="btn btn-warning btn-xs"><i title="Editar" class="fa fa-pencil"></i></a>
+					                        <a th:href="@{/avaliacao/delete/{id}(id=${avaliacao.id})}" class="btn btn-danger btn-xs"><i title="Excluir" class="fa fa-trash"></i></a>
 				                      	</div>
 									</td>
 								</tr>
@@ -157,24 +157,24 @@
 	<!-- bootstrap-datetimepicker -->    
     <script src="/template/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 	<script th:inline="javascript">
-		$('#moduloAutoComplete').autocomplete({
-			serviceUrl: '/modulo/list/getByNameStartingWith',
+		$('#modeloAvaliacaoAutoComplete').autocomplete({
+			serviceUrl: '/modeloAvaliacao/list/getByNameStartingWith',
 			dataType: 'json',
 			suggestions: true,
 			transformResult: function(response) {
 		        return {
 		            suggestions: $.map(response, function(item) {
-		                return { value: item.nome, data: item.id };
+		                return { value: item.codigo, data: item.id };
 		            })
 		        };
 		    },
 		    onSelect : function (suggestion) {
-		    	$("#moduloId").val(suggestion.data);
+		    	$("#modeloAvaliacaoId").val(suggestion.data);
 		    }
-		}).val(/*[[${turmaTemp.modulo.nome}]]*/);
+		}).val(/*[[${avaliacaoTemp.modelo.codigo}]]*/);
 		
-		$('#professorAutoComplete').autocomplete({
-			serviceUrl: '/professor/list/getByNameStartingWith',
+		$('#turmaAutoComplete').autocomplete({
+			serviceUrl: '/turma/list/getByNameStartingWith',
 			dataType: 'json',
 			suggestions: true,
 			autoSelectFirst: true,
@@ -182,25 +182,25 @@
 			transformResult: function(response) {
 		        return {
 		            suggestions: $.map(response, function(item) {
-		                return { value: item.nome, data: item.id };
+		                return { value: item.codigo, data: item.id };
 		            })
 		        };
 		    },
 		    onSelect : function (suggestion) {
-		    	$("#professorId").val(suggestion.data);
+		    	$("#modeloTurmaId").val(suggestion.data);
 		    }
-		}).val(/*[[${turmaTemp.professor.nome}]]*/);
+		}).val(/*[[${avaliacaoTemp.turma.codigo}]]*/);
 		
 		$('#dataInicio').datetimepicker({
 			format: 'DD/MM/YYYY',
 			defaultDate: "11/1/2013",
-			defaultDate: /*[[${turmaTemp.inicio}]]*/,
+			defaultDate: /*[[${avaliacaoTemp.inicio}]]*/,
 	    });
 		
 		$('#dataTermino').datetimepicker({
 			format: 'DD/MM/YYYY',
 			useCurrent: false,
-			defaultDate: /*[[${turmaTemp.termino}]]*/,
+			defaultDate: /*[[${avaliacaoTemp.termino}]]*/,
 	    });
 		$("#dataInicio").on("dp.change", function (e) {
 			$('#dataInicio').data("DateTimePicker").hide();
@@ -212,8 +212,6 @@
             $('#dataInicio').data("DateTimePicker").maxDate(e.date);
             $("#dataTerminoHidden").val($('#dataTerminoInput').val());
         });
-       
 	 </script>
-
 </th:block>
 </html>
