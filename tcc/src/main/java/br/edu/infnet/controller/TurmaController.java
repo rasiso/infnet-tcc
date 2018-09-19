@@ -1,5 +1,7 @@
 package br.edu.infnet.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.edu.infnet.model.Modulo;
+import br.edu.infnet.model.Professor;
 import br.edu.infnet.model.Turma;
 import br.edu.infnet.repository.TurmaRepository;
 
@@ -22,6 +26,12 @@ public class TurmaController {
 	@GetMapping
 	public ModelAndView listar() {
 		ModelAndView mav = new ModelAndView("turmaMain");
+		Modulo modulo = new Modulo();
+		Professor professor = new Professor();
+		Turma turma = new Turma();
+		turma.setModulo(modulo);
+		turma.setProfessor(professor);
+		mav.addObject("turmaTemp", turma);
 		mav.addObject(new Turma());
 		mav.addObject("turmas", this.turmaRepository.findAll());
 		return mav;
@@ -30,6 +40,8 @@ public class TurmaController {
 	@GetMapping("/edit/{id}")
 	public ModelAndView getById(@PathVariable long id, ModelMap model) {
 		ModelAndView mav = new ModelAndView("turmaMain");
+		Optional<Turma> turma = this.turmaRepository.findById(id);
+		turma.ifPresent(obj -> mav.addObject("turmaTemp", obj));
 		mav.addObject("turma", this.turmaRepository.findById(id));
 		mav.addObject("turmas", this.turmaRepository.findAll());
 		return mav;

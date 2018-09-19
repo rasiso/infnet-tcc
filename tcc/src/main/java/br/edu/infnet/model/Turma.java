@@ -17,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.NaturalId;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity 
 public class Turma implements Serializable {
@@ -47,9 +48,11 @@ public class Turma implements Serializable {
 	private List<Avaliacao> Avaliacao;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy") 
 	private Date inicio;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy") 
 	private Date termino;
 
 	public Long getId() {

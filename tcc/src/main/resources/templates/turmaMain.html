@@ -71,26 +71,25 @@
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-1 col-xs-1"
-									for="last-name">Início <span class="required">*</span>
+									for="last-name" style="margin-right: 10px;">Início <span class="required">*</span>
 								</label>
-								<div class='input-group date col-md-2 col-sm-1 col-xs-1' id='myDatepicker1' data-date-format="dd-mm-yyyy">
-		                            <input type='text' class="form-control"  />
+								<div class="input-group date col-md-2 col-sm-1 col-xs-1" id="dataInicio" >
+		                            <input type="text" class="form-control" id="dataInicioInput"/>
 		                            <span class="input-group-addon">
 		                               <span class="glyphicon glyphicon-calendar"></span>
 		                            </span>
 		                        </div>
+		                        <input id="dataInicioHidden" th:type="hidden" th:field="${turma.inicio}" class="form-control"  />
 								<label class="control-label col-md-3 col-sm-1 col-xs-1"
-									for="last-name">Término<span class="required">*</span>
+									for="last-name" style="margin-right: 10px;">Término<span class="required">*</span>
 								</label>
-								<div class='input-group date col-md-2 col-sm-1 col-xs-1' id='myDatepicker2' data-date-format="dd-mm-yyyy">
-		                            <input type='text' class="form-control"  />
+								<div class="input-group date col-md-2 col-sm-1 col-xs-1" id="dataTermino">
+		                            <input type="text"  class="form-control" id="dataTerminoInput"/>
 		                            <span class="input-group-addon">
 		                               <span class="glyphicon glyphicon-calendar"></span>
 		                            </span>
 		                        </div>
-								<!-- <div class="col-md-2 col-sm-1 col-xs-1">
-									<input type="text" class="form-control has-feedback-left" id="single_cal4">
-								</div> -->
+		                        <input id="dataTerminoHidden" th:type="hidden" th:field="${turma.termino}" class="form-control"  />
 							</div>
 							<div class="ln_solid"></div>
 							<div class="form-group">
@@ -157,7 +156,7 @@
     <script src="/template/vendors/moment/min/moment.min.js"></script>
 	<!-- bootstrap-datetimepicker -->    
     <script src="/template/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-	<script>
+	<script th:inline="javascript">
 		$('#moduloAutoComplete').autocomplete({
 			serviceUrl: '/modulo/list/getByNameStartingWith',
 			dataType: 'json',
@@ -172,7 +171,7 @@
 		    onSelect : function (suggestion) {
 		    	$("#moduloId").val(suggestion.data);
 		    }
-		});
+		}).val(/*[[${turmaTemp.modulo.nome}]]*/);
 		
 		$('#professorAutoComplete').autocomplete({
 			serviceUrl: '/professor/list/getByNameStartingWith',
@@ -190,13 +189,30 @@
 		    onSelect : function (suggestion) {
 		    	$("#professorId").val(suggestion.data);
 		    }
-		});
+		}).val(/*[[${turmaTemp.professor.nome}]]*/);
 		
-		$('#myDatepicker1').datetimepicker({
+		$('#dataInicio').datetimepicker({
+			format: 'DD/MM/YYYY',
+			defaultDate: "11/1/2013",
+			defaultDate: /*[[${turmaTemp.inicio}]]*/,
 	    });
 		
-		$('#myDatepicker2').datetimepicker({
+		$('#dataTermino').datetimepicker({
+			format: 'DD/MM/YYYY',
+			useCurrent: false,
+			defaultDate: /*[[${turmaTemp.termino}]]*/,
 	    });
+		$("#dataInicio").on("dp.change", function (e) {
+			$('#dataInicio').data("DateTimePicker").hide();
+            $('#dataTermino').data("DateTimePicker").minDate(e.date);
+            $("#dataInicioHidden").val($('#dataInicioInput').val());
+        });
+        $("#dataTermino").on("dp.change", function (e) {
+        	$('#dataTermino').data("DateTimePicker").hide();
+            $('#dataInicio').data("DateTimePicker").maxDate(e.date);
+            $("#dataTerminoHidden").val($('#dataTerminoInput').val());
+        });
+       
 	 </script>
 
 </th:block>
