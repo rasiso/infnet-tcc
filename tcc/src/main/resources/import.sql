@@ -58,6 +58,26 @@ insert into questao (id, enunciado, categoria_id) values (3, 'Enunciado da Quest
 insert into questao (id, enunciado, categoria_id) values (4, 'Enunciado da Questão  004', 4);
 insert into questao (id, enunciado, categoria_id) values (5, 'Enunciado da Questão  005', 5);
 
+insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (1, 'Assunto e-mail modelo 1', 'MODEL001', 'Mensagem email modelo 1', 'Objetivo modelo 1');
+insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (2, 'Assunto e-mail modelo 2', 'MODEL002', 'Mensagem email modelo 2', 'Objetivo modelo 2');
+insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (3, 'Assunto e-mail modelo 3', 'MODEL003', 'Mensagem email modelo 3', 'Objetivo modelo 3');
+insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (4, 'Assunto e-mail modelo 4', 'MODEL004', 'Mensagem email modelo 4', 'Objetivo modelo 4');
+insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (5, 'Assunto e-mail modelo 5', 'MODEL005', 'Mensagem email modelo 5', 'Objetivo modelo 5');
+
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 1);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 2);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 3);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 4);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 5);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 1);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 2);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 3);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 4);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 5);
+
+insert into avaliacao (id, codigo, convite_enviado, inicio, respondida, termino, id_modelo, id_aluno, id_turma) values (1, 'AVALIACAO001', NULL, CURRENT_DATE, NULL, CURRENT_DATE, 1, null, 1);
+insert into avaliacao (id, codigo, convite_enviado, inicio, respondida, termino, id_modelo, id_aluno, id_turma) values (2, 'AVALIACAO002', NULL, CURRENT_DATE, NULL, CURRENT_DATE, 2, null, 2);
+
 INSERT INTO role(role_id,role) VALUES (1,'ADMIN');
 INSERT INTO role(role_id,role) VALUES(2,'USER');
  
