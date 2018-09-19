@@ -58,7 +58,7 @@ insert into questao (id, enunciado, categoria_id) values (3, 'Enunciado da Quest
 insert into questao (id, enunciado, categoria_id) values (4, 'Enunciado da Questão  004', 4);
 insert into questao (id, enunciado, categoria_id) values (5, 'Enunciado da Questão  005', 5);
 
-insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (1, 'Assunto e-mail modelo 1', 'MODEL001', 'Mensagem email modelo 1', 'Objetivo modelo 1');
+insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (1, 'Infnet - Avaliação da Disciplina - <modulo>', 'Q20180912121300', 'Prezad<o/a> <aluno>, \nPor favor, avalie a Disciplina <modulo>! \nLink: <link>', 'Avaliar a Disciplina');
 insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (2, 'Assunto e-mail modelo 2', 'MODEL002', 'Mensagem email modelo 2', 'Objetivo modelo 2');
 insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (3, 'Assunto e-mail modelo 3', 'MODEL003', 'Mensagem email modelo 3', 'Objetivo modelo 3');
 insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (4, 'Assunto e-mail modelo 4', 'MODEL004', 'Mensagem email modelo 4', 'Objetivo modelo 4');
@@ -85,12 +85,3 @@ INSERT INTO user (user_id,email, name, last_name,password,active) VALUES (1,'maa
 INSERT INTO user (user_id,email, name, last_name,password,active) values (2,'aluno@infnet.com.br','rafael','', '$2a$10$yAKeqZAXcD93UbtjaWGnju.Xaq/abUPLk7kq/dfdBWV.KgXaOpI5W',1);
 
 INSERT INTO user_role (user_id, role_id) VALUES (1, 1), (2, 1);
-
-INSERT INTO modelo_avaliacao (id, codigo, objetivo, assunto_email, mensagem_email)  
-VALUES (1,"Q20180912121300","Avaliar a Disciplina","Infnet - Avaliação da Disciplina - <modulo>",
-"Prezad<o/a> <aluno>, \nPor favor, avalie a Disciplina <modulo>! \nLink: <link>");
-
-
-
-
-
