@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,21 +34,23 @@ public class Turma implements Serializable {
 	@NaturalId
 	private String codigo;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "turma_x_aluno", joinColumns = { @JoinColumn(name = "id_turma") }, inverseJoinColumns = {
 	@JoinColumn(name = "id_aluno") })
 	private List<Aluno> alunos;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_modulo", nullable=false)
 	private Modulo modulo;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_professor")
 	private Professor professor;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "turma")
+	
+	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY)
 	private List<Avaliacao> Avaliacao;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -98,6 +101,7 @@ public class Turma implements Serializable {
 		this.professor = professor;
 	}
 
+	@JsonIgnore
 	public List<Avaliacao> getAvaliacao() {
 		return Avaliacao;
 	}

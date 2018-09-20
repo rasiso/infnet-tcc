@@ -23,14 +23,12 @@ public class Resposta implements Serializable {
 	private Questao questao;
 
 	@OneToOne
-	@JoinColumn(name = "id_avaliacao")
-	private Avaliacao avaliacao;
+	@JoinColumn(name = "id_formulario")
+	private Formulario formulario;
 	
 	@OneToOne
 	@JoinColumn(name = "id_aluno")
 	private Aluno aluno;
-
-	private Integer resposta;
 
 	public Long getId() {
 		return id;
@@ -48,12 +46,12 @@ public class Resposta implements Serializable {
 		this.questao = questao;
 	}
 
-	public Avaliacao getAvaliacao() {
-		return avaliacao;
+	public Formulario getFormulario() {
+		return formulario;
 	}
 
-	public void setAvaliacao(Avaliacao avaliacao) {
-		this.avaliacao = avaliacao;
+	public void setFormulario(Formulario formulario) {
+		this.formulario = formulario;
 	}
 
 	public Aluno getAluno() {
@@ -62,14 +60,6 @@ public class Resposta implements Serializable {
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
-	}
-
-	public Integer getResposta() {
-		return resposta;
-	}
-
-	public void setResposta(Integer resposta) {
-		this.resposta = resposta;
 	}
 
 	public static long getSerialversionuid() {
@@ -81,10 +71,9 @@ public class Resposta implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
-		result = prime * result + ((avaliacao == null) ? 0 : avaliacao.hashCode());
+		result = prime * result + ((formulario == null) ? 0 : formulario.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((questao == null) ? 0 : questao.hashCode());
-		result = prime * result + ((resposta == null) ? 0 : resposta.hashCode());
 		return result;
 	}
 
@@ -102,10 +91,10 @@ public class Resposta implements Serializable {
 				return false;
 		} else if (!aluno.equals(other.aluno))
 			return false;
-		if (avaliacao == null) {
-			if (other.avaliacao != null)
+		if (formulario == null) {
+			if (other.formulario != null)
 				return false;
-		} else if (!avaliacao.equals(other.avaliacao))
+		} else if (!formulario.equals(other.formulario))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -116,11 +105,6 @@ public class Resposta implements Serializable {
 			if (other.questao != null)
 				return false;
 		} else if (!questao.equals(other.questao))
-			return false;
-		if (resposta == null) {
-			if (other.resposta != null)
-				return false;
-		} else if (!resposta.equals(other.resposta))
 			return false;
 		return true;
 	}

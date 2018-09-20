@@ -7,15 +7,15 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.converters.TagConverter;
 import br.edu.infnet.email.envio.EmailSenderService;
 import br.edu.infnet.model.Avaliacao;
+import br.edu.infnet.model.Formulario;
 import br.edu.infnet.model.Mensagem;
-import br.edu.infnet.model.ModeloAvaliacao;
 import br.edu.infnet.repository.AvaliacaoRepository;
+import br.edu.infnet.repository.FormularioRepository;
 
 /**
  * Responsável por trabalhar as regras de negócio antes de enviar o email.
@@ -29,7 +29,8 @@ public class EmailService {
 	private EmailSenderService emailSender;
     
     @Autowired
-    private AvaliacaoRepository repositorio;
+    private AvaliacaoRepository avaliacaoRepositorio;
+    private FormularioRepository formularioRepositorio;
 
     public void enviar() {
     	
@@ -50,14 +51,15 @@ public class EmailService {
     	
     	if(existeAvaliacaoPendente) {
     		for(Avaliacao avaliacaoPendente : avaliacoesPendentes) {
-        		convideNaoFoiEnviado = !avaliacaoPendente.getConviteEnviado();
-        		
-        		if(convideNaoFoiEnviado) {
-        			mensagem = construirMensagem(avaliacaoPendente);
-        			emailSender.enviar(mensagem);
-        			registrarEnvio(avaliacaoPendente);
-        			log.info("Email enviado com Sucesso para "+avaliacaoPendente.getRespondente().getEmail());
-        		}
+    			for(Formulario formularioPendente : avaliacaoPendente.getFormularios()) {
+    				convideNaoFoiEnviado = !formularioPendente.getConviteEnviado();
+	        		if(convideNaoFoiEnviado) {
+	        			mensagem = construirMensagem(avaliacaoPendente);
+	        			emailSender.enviar(mensagem);
+	        			registrarEnvio(formularioPendente);
+	        			log.info("Email enviado com Sucesso para "+formularioPendente.getRespondente().getEmail());
+	        		}
+    			}
         	}
     	}
     	
@@ -68,46 +70,41 @@ public class EmailService {
 
 	
 
-	private void registrarEnvio(Avaliacao avaliacaoPendente) {
-		avaliacaoPendente.setConviteEnviado(true);		
-		repositorio.saveAndFlush(avaliacaoPendente);
+	private void registrarEnvio(Formulario formularioPendente) {
+		formularioPendente.setConviteEnviado(true);		
+		formularioRepositorio.saveAndFlush(formularioPendente);
 	}
 
 
 
 	private Mensagem construirMensagem(Avaliacao avaliacaoPendente) {
 		String remetente = "infnet.tcc@gmail.com";
+		String assunto = ""; 
+		String corpo = ""; 
 		
 		List<String> destinatarios = new ArrayList<String>();
-		destinatarios.add(avaliacaoPendente.getRespondente().getEmail());
-		
-		String assunto = obterAssuntoEmail(avaliacaoPendente);
-		String corpo = construirCorpoDaMensagem(avaliacaoPendente);
-		
-		return new Mensagem(remetente, destinatarios, assunto, corpo);
+			for(Formulario formularioPendente : avaliacaoPendente.getFormularios()) {
+				destinatarios.add(formularioPendente.getRespondente().getEmail());
+				assunto = obterAssuntoEmail(formularioPendente);
+				corpo = construirCorpoDaMensagem(formularioPendente);
+			}
+			
+			return new Mensagem(remetente, destinatarios, assunto, corpo);	
 	}
 
-	
-
-
-
-	private String obterAssuntoEmail(Avaliacao avaliacao) {
-		return new TagConverter().obterTexto(avaliacao, avaliacao.getModelo().getAssuntoEmail());
+	private String obterAssuntoEmail(Formulario formulario) {
+		return new TagConverter().obterTexto(formulario, formulario.getAvaliacao().getModelo().getAssuntoEmail());
 	}
 
-
-
-	private String construirCorpoDaMensagem(Avaliacao avaliacao) {		
-		return new TagConverter().obterTexto(avaliacao, avaliacao.getModelo().getMensagemEmail());
+	private String construirCorpoDaMensagem(Formulario formulario) {		
+		return new TagConverter().obterTexto(formulario, formulario.getAvaliacao().getModelo().getMensagemEmail());
 	}
-
-
 
 	private List<Avaliacao> obterAvaliacoesPendentes() {
 		
 		List<Avaliacao> avaliacoesPendentes = null;
 		try {
-			avaliacoesPendentes = repositorio.obterAvaliacoesPendentes(new Date());
+			avaliacoesPendentes = avaliacaoRepositorio.obterAvaliacoesPendentes(new Date());
 			System.out.println(avaliacoesPendentes.toString());
 		} catch (Exception e) {
 			System.out.println("Repositorio da Avaliacao nao esta disponivel.");
@@ -116,7 +113,5 @@ public class EmailService {
 		
 		return avaliacoesPendentes;
 	}
-
-	
 
 }

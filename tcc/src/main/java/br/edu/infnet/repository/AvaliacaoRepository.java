@@ -14,7 +14,9 @@ import br.edu.infnet.model.Avaliacao;
 @Repository
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long>{
 	
-	@Query("SELECT a FROM Avaliacao a WHERE a.inicio <= :hoje AND a.conviteEnviado = false")
+	@Query("SELECT a FROM Avaliacao a "
+			+ "INNER JOIN Formulario f on f.avaliacao.id = a.id"
+			+ " WHERE a.inicio <= :hoje AND f.conviteEnviado = false")
 	List<Avaliacao> obterAvaliacoesPendentes(@Param("hoje") Date inicio) ;
 
 }
