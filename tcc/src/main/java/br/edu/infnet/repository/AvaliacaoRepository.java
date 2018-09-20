@@ -9,14 +9,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.edu.infnet.model.Avaliacao;
+import br.edu.infnet.model.Formulario;
 
 
 @Repository
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long>{
 	
-	@Query("SELECT a FROM Avaliacao a "
-			+ "INNER JOIN Formulario f on f.avaliacao.id = a.id"
-			+ " WHERE a.inicio <= :hoje AND f.conviteEnviado = false")
-	List<Avaliacao> obterAvaliacoesPendentes(@Param("hoje") Date inicio) ;
+	
 
 }

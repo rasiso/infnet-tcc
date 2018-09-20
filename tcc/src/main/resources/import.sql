@@ -75,8 +75,7 @@ insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values 
 insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 4);
 insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 5);
 
-insert into avaliacao (id, codigo, convite_enviado, inicio, respondida, termino, id_modelo, id_aluno, id_turma) values (1, 'AVALIACAO001', NULL, CURRENT_DATE, NULL, CURRENT_DATE, 1, null, 1);
-insert into avaliacao (id, codigo, convite_enviado, inicio, respondida, termino, id_modelo, id_aluno, id_turma) values (2, 'AVALIACAO002', NULL, CURRENT_DATE, NULL, CURRENT_DATE, 2, null, 2);
+insert into avaliacao (id, codigo, inicio, termino, id_modelo, id_turma) values (1, 'AVALIACAO001', CURRENT_DATE, CURRENT_DATE, 1, 1);
 
 INSERT INTO role(role_id,role) VALUES (1,'ADMIN');
 INSERT INTO role(role_id,role) VALUES(2,'USER');

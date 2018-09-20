@@ -28,8 +28,8 @@ public class EmailService {
     @Autowired
 	private EmailSenderService emailSender;
     
+    
     @Autowired
-    private AvaliacaoRepository avaliacaoRepositorio;
     private FormularioRepository formularioRepositorio;
 
     public void enviar() {
@@ -44,31 +44,44 @@ public class EmailService {
     	 * 
     	 */
     	
-    	List<Avaliacao> avaliacoesPendentes = obterAvaliacoesPendentes();
-    	boolean existeAvaliacaoPendente = avaliacoesPendentes != null && !avaliacoesPendentes.isEmpty();
+    	    	
     	boolean convideNaoFoiEnviado;
     	Mensagem mensagem = null;
     	
-    	if(existeAvaliacaoPendente) {
-    		for(Avaliacao avaliacaoPendente : avaliacoesPendentes) {
-    			for(Formulario formularioPendente : avaliacaoPendente.getFormularios()) {
-    				convideNaoFoiEnviado = !formularioPendente.getConviteEnviado();
-	        		if(convideNaoFoiEnviado) {
-	        			mensagem = construirMensagem(avaliacaoPendente);
-	        			emailSender.enviar(mensagem);
-	        			registrarEnvio(formularioPendente);
-	        			log.info("Email enviado com Sucesso para "+formularioPendente.getRespondente().getEmail());
-	        		}
-    			}
+    	List<Formulario> formulariosPendentes = obterFormulariosPendentes();
+    	boolean existeFormularioPendente = formulariosPendentes != null && !formulariosPendentes.isEmpty();
+    	
+    	if(existeFormularioPendente) {
+    		for(Formulario formularioPendente : formulariosPendentes) {
+				convideNaoFoiEnviado = !formularioPendente.getConviteEnviado();
+        		if(convideNaoFoiEnviado) {
+        			mensagem = construirMensagem(formularioPendente);
+        			emailSender.enviar(mensagem);
+        			registrarEnvio(formularioPendente);
+        			log.info("Email enviado com Sucesso para "+formularioPendente.getRespondente().getEmail());
+        		}
+    			
         	}
     	}
-    	
-    	
-    	
         
     }
 
 	
+
+	private List<Formulario> obterFormulariosPendentes() {
+		List<Formulario> formulariosPendentes = null;
+		try {
+			formulariosPendentes = formularioRepositorio.obterFormulariosPendentes(new Date());
+			System.out.println(formulariosPendentes.toString());
+		} catch (Exception e) {
+			System.err.println("Repositorio do Formulario nao esta disponivel."+e.getMessage());
+			
+		}
+		
+		return formulariosPendentes;
+	}
+
+
 
 	private void registrarEnvio(Formulario formularioPendente) {
 		formularioPendente.setConviteEnviado(true);		
@@ -77,19 +90,18 @@ public class EmailService {
 
 
 
-	private Mensagem construirMensagem(Avaliacao avaliacaoPendente) {
+	private Mensagem construirMensagem(Formulario formularioPendente) {
 		String remetente = "infnet.tcc@gmail.com";
 		String assunto = ""; 
 		String corpo = ""; 
 		
 		List<String> destinatarios = new ArrayList<String>();
-			for(Formulario formularioPendente : avaliacaoPendente.getFormularios()) {
-				destinatarios.add(formularioPendente.getRespondente().getEmail());
-				assunto = obterAssuntoEmail(formularioPendente);
-				corpo = construirCorpoDaMensagem(formularioPendente);
-			}
 			
-			return new Mensagem(remetente, destinatarios, assunto, corpo);	
+		destinatarios.add(formularioPendente.getRespondente().getEmail());
+		assunto = obterAssuntoEmail(formularioPendente);
+		corpo = construirCorpoDaMensagem(formularioPendente);			
+			
+		return new Mensagem(remetente, destinatarios, assunto, corpo);	
 	}
 
 	private String obterAssuntoEmail(Formulario formulario) {
@@ -100,18 +112,6 @@ public class EmailService {
 		return new TagConverter().obterTexto(formulario, formulario.getAvaliacao().getModelo().getMensagemEmail());
 	}
 
-	private List<Avaliacao> obterAvaliacoesPendentes() {
-		
-		List<Avaliacao> avaliacoesPendentes = null;
-		try {
-			avaliacoesPendentes = avaliacaoRepositorio.obterAvaliacoesPendentes(new Date());
-			System.out.println(avaliacoesPendentes.toString());
-		} catch (Exception e) {
-			System.out.println("Repositorio da Avaliacao nao esta disponivel.");
-			
-		}
-		
-		return avaliacoesPendentes;
-	}
+	
 
 }
