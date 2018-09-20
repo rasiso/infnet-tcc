@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import br.edu.infnet.model.Aluno;
 import br.edu.infnet.model.Formulario;
 
 
@@ -20,6 +21,11 @@ public interface FormularioRepository extends JpaRepository<Formulario, Long>{
 			+ "JOIN FETCH Avaliacao a on f.avaliacao.id = a.id"
 			+ " WHERE a.inicio <= :hoje AND f.conviteEnviado = false")
 	List<Formulario> obterFormulariosPendentes(@Param("hoje") Date hoje);
+	
+	
+	@Query("SELECT f FROM Formulario f "
+			+ "WHERE f.respondente.id = :alunoId AND f.avaliacao.id = :avaliacaoId")
+	Formulario obterRespondenteComAvaliacao(@Param("avaliacaoId") Long avaliacaoId, @Param("alunoId") Long alunoId);
 	
 
 }

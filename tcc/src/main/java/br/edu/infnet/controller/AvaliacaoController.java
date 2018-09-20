@@ -15,6 +15,7 @@ import br.edu.infnet.model.Avaliacao;
 import br.edu.infnet.model.ModeloAvaliacao;
 import br.edu.infnet.model.Turma;
 import br.edu.infnet.repository.AvaliacaoRepository;
+import br.edu.infnet.service.FormularioService;
 
 @Controller
 @RequestMapping("/avaliacao")
@@ -22,6 +23,9 @@ public class AvaliacaoController {
 
 	@Autowired
 	private AvaliacaoRepository avaliacaoRepository;
+	
+	@Autowired
+	private FormularioService formularioService;
 	
 	@GetMapping
 	public ModelAndView listar() {
@@ -56,6 +60,7 @@ public class AvaliacaoController {
 	@PostMapping
 	public String salvar(Avaliacao avaliacao) {
 		this.avaliacaoRepository.save(avaliacao);
+		formularioService.criarFormularios(avaliacao);
 		return "redirect:/avaliacao";
 	}
 
