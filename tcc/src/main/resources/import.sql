@@ -22,11 +22,11 @@ insert into professor (id, matricula, nome, sexo) values (3, 'PRF003', 'Professo
 insert into professor (id, matricula, nome, sexo) values (4, 'PRF004', 'Professor Nome IV', 'Masculino');
 insert into professor (id, matricula, nome, sexo) values (5, 'PRF005', 'Professor Nome V', 'Feminino');
 
-insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (1, 'TRM001', CURRENT_DATE, CURRENT_DATE, 1, 1);  
-insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (2, 'TRM002', CURRENT_DATE, CURRENT_DATE, 2, 2); 
-insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (3, 'TRM003', CURRENT_DATE, CURRENT_DATE, 3, 3);
-insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (4, 'TRM004', CURRENT_DATE, CURRENT_DATE, 4, 4); 
-insert into turma (id, codigo, inicio, termino, id_modulo, id_professor) values (5, 'TRM005', CURRENT_DATE, CURRENT_DATE, 5, 5); 
+insert into turma (id, codigo, nome, inicio, termino, id_modulo, id_professor) values (1, 'TRM001', 'Java Web com JSF',CURRENT_DATE, CURRENT_DATE, 1, 1);  
+insert into turma (id, codigo, nome, inicio, termino, id_modulo, id_professor) values (2, 'TRM002', 'Usando Rest no Java',CURRENT_DATE, CURRENT_DATE, 2, 2); 
+insert into turma (id, codigo, nome, inicio, termino, id_modulo, id_professor) values (3, 'TRM003', 'Java Básico',CURRENT_DATE, CURRENT_DATE, 3, 3);
+insert into turma (id, codigo, nome, inicio, termino, id_modulo, id_professor) values (4, 'TRM004', 'Scrum',CURRENT_DATE, CURRENT_DATE, 4, 4); 
+insert into turma (id, codigo, nome, inicio, termino, id_modulo, id_professor) values (5, 'TRM005', 'Inteligência Artificial com Java e Weka', CURRENT_DATE, CURRENT_DATE, 5, 5); 
 
 insert into aluno (id, matricula, sexo, nome, email) values (1, 'ALN001', 'Masculino', 'Aluno Nome I'  , 'email_aluno@email.com');
 insert into aluno (id, matricula, sexo, nome, email) values (2, 'ALN002', 'Feminino',  'Aluno Nome II' , 'email_aluno@email.com');
@@ -58,7 +58,7 @@ insert into questao (id, enunciado, categoria_id) values (3, 'Enunciado da Quest
 insert into questao (id, enunciado, categoria_id) values (4, 'Enunciado da Questão  004', 4);
 insert into questao (id, enunciado, categoria_id) values (5, 'Enunciado da Questão  005', 5);
 
-insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (1, 'Infnet - Avaliação da Disciplina - <modulo>', 'Q20180912121300', 'Prezad<o/a> <aluno>, \nPor favor, avalie a Disciplina <modulo>! \nLink: <link>', 'Avaliar a Disciplina');
+insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (1, 'Infnet - Avaliação da Disciplina <turma> - <modulo>', 'Q20180912121300', 'Prezad<o/a> <aluno>, \nPor favor, avalie a Disciplina <turma> - <modulo>! \nLink: <link>', 'Avaliar a Disciplina');
 insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (2, 'Assunto e-mail modelo 2', 'MODEL002', 'Mensagem email modelo 2', 'Objetivo modelo 2');
 insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (3, 'Assunto e-mail modelo 3', 'MODEL003', 'Mensagem email modelo 3', 'Objetivo modelo 3');
 insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (4, 'Assunto e-mail modelo 4', 'MODEL004', 'Mensagem email modelo 4', 'Objetivo modelo 4');

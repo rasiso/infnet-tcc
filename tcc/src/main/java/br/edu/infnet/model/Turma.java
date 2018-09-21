@@ -33,6 +33,8 @@ public class Turma implements Serializable {
 
 	@NaturalId
 	private String codigo;
+	
+	private String nome;
 
 	@JsonIgnore
 	@ManyToMany
@@ -75,6 +77,14 @@ public class Turma implements Serializable {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}	
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public List<Aluno> getAlunos() {
@@ -136,6 +146,7 @@ public class Turma implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((inicio == null) ? 0 : inicio.hashCode());
 		result = prime * result + ((modulo == null) ? 0 : modulo.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((professor == null) ? 0 : professor.hashCode());
 		result = prime * result + ((termino == null) ? 0 : termino.hashCode());
 		return result;
@@ -180,6 +191,11 @@ public class Turma implements Serializable {
 				return false;
 		} else if (!modulo.equals(other.modulo))
 			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
 		if (professor == null) {
 			if (other.professor != null)
 				return false;
@@ -192,5 +208,9 @@ public class Turma implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
+
+	
 	
 }

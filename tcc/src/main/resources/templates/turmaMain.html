@@ -48,6 +48,15 @@
 									<input type="text" th:field="${turma.codigo}" required="required"
 										class="form-control col-md-2 col-xs-12">
 								</div>
+                            </div>
+                            <div class="form-group">
+								<label class="control-label col-md-3 col-sm-1 col-xs-1"
+									for="first-name">Nome <span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-3 col-xs-1">
+									<input type="text" th:field="${turma.nome}" required="required"
+										class="form-control col-md-2 col-xs-12">
+								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-1 col-xs-1"
@@ -58,7 +67,7 @@
 										class="form-control col-md-2 col-xs-12" required="required">
 									<input th:type="hidden" id="moduloId" th:field="${turma.modulo.id}" />
 								</div>
-							</div>
+                            </div>                            
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-1 col-xs-1"
 									for="first-name">Professor <span class="required">*</span>
@@ -115,8 +124,9 @@
 								<tr>
 									<th width="15%">Código</th>
 									<!-- <th width="50%">Nome</th> -->
-									<th width="30%">Módulo</th>
-									<th width="30%">Professor</th>
+                                    <th width="15%">Nome</th>
+                                    <th width="15%">Módulo</th>                                    
+									<th width="15%">Professor</th>
 									<th width="10%">Início</th>
 									<th width="10%">Termino</th>
 									<th width="5%">Opções</th>
@@ -125,8 +135,9 @@
 							<tbody>
 								<tr th:each="turma : ${turmas}">
 									<td th:text="${turma.codigo}"></td>
-									<!-- <td th:text="${turma.nome}"></td> -->
-									<td th:text="${turma.modulo.nome}"></td>
+                                    <!-- <td th:text="${turma.nome}"></td> -->
+                                    <td th:text="${turma.nome}"></td>
+                                    <td th:text="${turma.modulo.nome}"></td>                                    
 									<td th:text="${turma.professor.nome}"></td>
 									<td th:text="${#dates.format(turma.inicio, 'dd/MM/yyyy')}"></td>
 									<td th:text="${#dates.format(turma.termino, 'dd/MM/yyyy')}"></td>
@@ -194,13 +205,13 @@
 		$('#dataInicio').datetimepicker({
 			format: 'DD/MM/YYYY',
 			defaultDate: "11/1/2013",
-			defaultDate: /*[[${turmaTemp.inicio}]]*/,
+			defaultDate: /*[[${turmaTemp.inicio}]]*/"",
 	    });
 		
 		$('#dataTermino').datetimepicker({
 			format: 'DD/MM/YYYY',
 			useCurrent: false,
-			defaultDate: /*[[${turmaTemp.termino}]]*/,
+			defaultDate: /*[[${turmaTemp.termino}]]*/"",
 	    });
 		$("#dataInicio").on("dp.change", function (e) {
 			$('#dataInicio').data("DateTimePicker").hide();
