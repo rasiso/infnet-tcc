@@ -18,7 +18,7 @@ public class TagConverter {
 		resultado = resultado.replaceAll("<aluno>", nome.substring(0, nome.indexOf(" ")));
 		resultado = resultado.replaceAll("<turma>", formulario.getAvaliacao().getTurma().getNome());
 		resultado = tratarGenero(formulario, resultado);
-		resultado = resultado.replaceAll("<link>", "localhost:9090/localizar/avaliacao/"+
+		resultado = resultado.replaceAll("<link>", "http://localhost:9090/localizar/avaliacao/"+
 											formulario.getAvaliacao().getId() + 
 											"/formulario/"+formulario.getId());
 		
