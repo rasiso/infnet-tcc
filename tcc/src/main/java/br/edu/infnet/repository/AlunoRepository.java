@@ -11,5 +11,7 @@ import br.edu.infnet.model.Aluno;
 public interface AlunoRepository extends JpaRepository<Aluno, Long>{
 	
 	public List<Aluno> findByNomeStartingWith(String nome);
+	
+	public Aluno findByMatricula(String matricula);
 
 }

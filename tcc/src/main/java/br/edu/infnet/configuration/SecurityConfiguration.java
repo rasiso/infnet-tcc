@@ -53,6 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		    .antMatchers("/").permitAll()
 		    .antMatchers("/template/**").permitAll()
 		    .antMatchers("/generic/**").permitAll()
+		    .antMatchers("/rest/**").permitAll()
 			.antMatchers("/login").permitAll()
 			.antMatchers("/turma").hasAuthority("ADMIN").anyRequest()
 			.authenticated().and().formLogin()
