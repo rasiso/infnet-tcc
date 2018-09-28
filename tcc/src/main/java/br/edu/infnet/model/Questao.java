@@ -30,7 +30,6 @@ public class Questao implements Serializable {
 	@ManyToMany(mappedBy = "questoes")
 	private List<ModeloAvaliacao> modelosAvaliacoes;
 	
-	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "categoria_id")
 	private CategoriaQuestao categoria;

@@ -55,6 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		    .antMatchers("/generic/**").permitAll()
 		    .antMatchers("/rest/**").permitAll()
 			.antMatchers("/login").permitAll()
+			.antMatchers("/formulario").permitAll()
 			.antMatchers("/turma").hasAuthority("ADMIN").anyRequest()
 			.authenticated().and().formLogin()
 			.loginPage("/login").failureUrl("/login?error=true")

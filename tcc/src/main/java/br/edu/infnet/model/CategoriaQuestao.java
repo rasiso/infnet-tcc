@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class CategoriaQuestao {
 	
@@ -19,7 +21,8 @@ public class CategoriaQuestao {
 	
 	private String nome;
 	
-	@OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
+	@OneToMany(mappedBy = "categoria")
 	private List<Questao> questoes;
 
 	public Long getId() {

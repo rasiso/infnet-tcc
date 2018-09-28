@@ -44,7 +44,6 @@ public class Avaliacao implements Serializable {
 	@DateTimeFormat(pattern = "dd/MM/yyyy") 
 	private Date termino;
 
-	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "id_turma")
 	private Turma turma;

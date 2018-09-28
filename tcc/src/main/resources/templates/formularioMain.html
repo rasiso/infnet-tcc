@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"   
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<link rel="icon" href="/generic/images/favicon.png" type="image/png" sizes="16x16">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Infnet</title>
+    <meta name="description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap -->
+    <link href="/template/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Datatables -->
+   	<link href="/template/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    
+  </head>
+
+<body>
+	<div class="container h-200">
+		<div class="row h-100 justify-content-center align-items-center">
+		<div class="page-title" 
+			style="background-image: url('/generic/images/logo_infnet_circulo.png'); 
+			background-size: 150px; 
+			background-repeat: no-repeat; 
+			padding: 40px 0 0 170px;
+			height: 150px;" >
+			
+			<h3>| &nbsp;&nbsp; Avaliação - Alunos da Pós-Graduação</h3>
+			<div class="title_right">
+				<div
+					class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+					<div class="input-group"></div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="clearfix"></div>
+		<div class="">
+			<p th:text="${'Aluno: '+formulario.respondente.nome}"></p> 
+			<p th:text="${'Turma: '+formulario.avaliacao.turma.modulo.nome}"></p> 
+		</div>
+		<p>
+			 Por favor, preencha essa avaliação com toda atenção. Ela é muito importante para a melhoria contínua de seu curso. É através das avaliações
+que poderemos construir um curso cada vez melhor, o que é importante para você agora e para o valor de seu diploma no futuro.</p>
+		<div class="row pagination-centered">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="x_panel">
+					<div class="x_content">
+						<table id="datatable" class="table table-striped table-bordered">
+							<tbody>
+								<tr th:each="questao : ${formulario.avaliacao.modelo.questoes}">
+									<td th:text="${questao.enunciado}"></td>
+                                   
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+</div>
+</div>
+
+
+<!-- jQuery -->
+    <script src="/template/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/template/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Datatables -->
+	<script src="/template/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+	<script src="/template/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+</body>
+</html>

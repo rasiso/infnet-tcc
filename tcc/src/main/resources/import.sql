@@ -33,8 +33,8 @@ insert into aluno (id, matricula, sexo, nome, email) values (2, 'ALN002', 'Femin
 insert into aluno (id, matricula, sexo, nome, email) values (3, 'ALN003', 'Feminino',  'Aluno Nome III', 'email_aluno@email.com');
 insert into aluno (id, matricula, sexo, nome, email) values (4, 'ALN004', 'Masculino', 'Aluno Nome IV' , 'email_aluno@email.com');
 insert into aluno (id, matricula, sexo, nome, email) values (5, 'ALN005', 'Feminino',  'Aluno Nome V'  , 'email_aluno@email.com');
-INSERT INTO aluno (id, matricula, sexo, nome, email) VALUES (6, 'ALN006', 'Masculino', 'Walter Almeida', 'walter.almeida@al.infnet.edu.br');
-INSERT INTO aluno (id, matricula, sexo, nome, email) VALUES (7, 'ALN007', 'Feminino',  'Aluna Hackeada', 'walter.almeida@al.infnet.edu.br');
+INSERT INTO aluno (id, matricula, sexo, nome, email) VALUES (6, 'ALN006', 'Masculino', 'Walter Almeida', 'infnet.tcc@gmail.com');
+INSERT INTO aluno (id, matricula, sexo, nome, email) VALUES (7, 'ALN007', 'Feminino',  'Aluna Hackeada', 'infnet.tcc@gmail.com');
 
 INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,1);
 INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,2);
@@ -45,37 +45,52 @@ INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (1,5);
 INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (2,6);
 INSERT INTO turma_x_aluno (id_turma, id_aluno)  VALUES (2,7);
 
+insert into categoria_questao (id, nome) values (1, 'Avaliação geral da Pós-Graduação');
+insert into categoria_questao (id, nome) values (2, 'Avaliação do professor no módulo');
+insert into categoria_questao (id, nome) values (3, 'Avaliação de conteúdo e infra-estrutura no módulo');
 
-insert into categoria_questao (id, nome) values (1, 'Categoria 001');
-insert into categoria_questao (id, nome) values (2, 'Categoria 002');
-insert into categoria_questao (id, nome) values (3, 'Categoria 003');
-insert into categoria_questao (id, nome) values (4, 'Categoria 004');
-insert into categoria_questao (id, nome) values (5, 'Categoria 005');
+insert into questao (id, enunciado, categoria_id) values (1, 'Até agora, o curso está atingindo as minhas expectativas', 1);
+insert into questao (id, enunciado, categoria_id) values (2, 'Até agora, eu indicaria o curso para um amigo', 1);
+insert into questao (id, enunciado, categoria_id) values (3, 'Até agora, o curso me parece voltado para as necessidades do mercado', 1);
+insert into questao (id, enunciado, categoria_id) values (4, 'Até agora, a coordenação pedagógica parece comprometida com a qualidade do curso', 1);
+insert into questao (id, enunciado, categoria_id) values (5, 'Até agora, minha turma parece proporcionar um networking relevante para a minha carreira', 1);
+insert into questao (id, enunciado, categoria_id) values (6, 'Até agora, o atendimento de Secretaria que recebi está atingindo as expectativas', 1);
 
-insert into questao (id, enunciado, categoria_id) values (1, 'Enunciado da Questão  001', 1);
-insert into questao (id, enunciado, categoria_id) values (2, 'Enunciado da Questão  002', 2);
-insert into questao (id, enunciado, categoria_id) values (3, 'Enunciado da Questão  003', 3);
-insert into questao (id, enunciado, categoria_id) values (4, 'Enunciado da Questão  004', 4);
-insert into questao (id, enunciado, categoria_id) values (5, 'Enunciado da Questão  005', 5);
+insert into questao (id, enunciado, categoria_id) values (7, 'O professor contribuiu para o meu aprendizado', 2);
+insert into questao (id, enunciado, categoria_id) values (8, 'O professor é atencioso e esteve disponível para tirar dúvidas', 2);
+insert into questao (id, enunciado, categoria_id) values (9, 'O professor aproveitou bem o tempo em sala de aula', 2);
+insert into questao (id, enunciado, categoria_id) values (10, 'O professor utilizou o Moodle e outros recursos didáticos para ajudar no meu aprendizado', 2);
+insert into questao (id, enunciado, categoria_id) values (11, 'O professor aproveitou bem os recursos da sala de aula', 2);
+insert into questao (id, enunciado, categoria_id) values (12, 'Gostaria de cursar outros módulos com esse professor', 2);
+
+insert into questao (id, enunciado, categoria_id) values (13, 'Eu adquiri as competências propostas para o módulo', 3);
+insert into questao (id, enunciado, categoria_id) values (14, 'O módulo foi útil para o meu crescimento profissional', 3);
+insert into questao (id, enunciado, categoria_id) values (15, 'A carga horária do módulo foi apropriada', 3);
+insert into questao (id, enunciado, categoria_id) values (16, 'O acervo da biblioteca atendeu as necessidades desse módulo', 3);
+insert into questao (id, enunciado, categoria_id) values (17, 'A configuração do(s) computadore(s) e equipamentos da sala de aula e a qualidade do suporte foi apropriada', 3);
 
 insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (1, 'Infnet - Avaliação da Disciplina <turma> - <modulo>', 'Q20180912121300', 'Prezad<o/a> <aluno>, \nPor favor, avalie a Disciplina <turma> - <modulo>! \nLink: <link>', 'Avaliar a Disciplina');
-insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (2, 'Assunto e-mail modelo 2', 'MODEL002', 'Mensagem email modelo 2', 'Objetivo modelo 2');
-insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (3, 'Assunto e-mail modelo 3', 'MODEL003', 'Mensagem email modelo 3', 'Objetivo modelo 3');
-insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (4, 'Assunto e-mail modelo 4', 'MODEL004', 'Mensagem email modelo 4', 'Objetivo modelo 4');
-insert into modelo_avaliacao (id, assunto_email, codigo, mensagem_email, objetivo) values (5, 'Assunto e-mail modelo 5', 'MODEL005', 'Mensagem email modelo 5', 'Objetivo modelo 5');
 
 insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 1);
 insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 2);
 insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 3);
 insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 4);
 insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 5);
-insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 1);
-insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 2);
-insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 3);
-insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 4);
-insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (2, 5);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 5);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 6);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 7);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 8);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 9);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 10);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 11);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 12);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 13);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 14);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 15);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 16);
+insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values (1, 17);
 
-insert into avaliacao (id, codigo, inicio, termino, id_modelo, id_turma) values (1, 'AVALIACAO001', CURRENT_DATE, CURRENT_DATE, 1, 1);
+insert into avaliacao (id, codigo, inicio, termino, id_modelo, id_turma) values (1, 'AVALIACAO001', CURRENT_DATE, CURRENT_DATE, 1, 2);
 
 INSERT INTO role(role_id,role) VALUES (1,'ADMIN');
 INSERT INTO role(role_id,role) VALUES(2,'USER');
