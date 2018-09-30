@@ -3,6 +3,7 @@ package br.edu.infnet.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,6 +35,10 @@ public class Questao implements Serializable {
 	@ManyToOne
     @JoinColumn(name = "categoria_id")
 	private CategoriaQuestao categoria;
+	
+	@OneToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name = "resposta_id")
+	private Resposta resposta;
 
 	public Long getId() {
 		return id;
@@ -66,6 +72,14 @@ public class Questao implements Serializable {
 		this.categoria = categoria;
 	}
 
+	public Resposta getResposta() {
+		return resposta;
+	}
+
+	public void setResposta(Resposta resposta) {
+		this.resposta = resposta;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -78,6 +92,7 @@ public class Questao implements Serializable {
 		result = prime * result + ((enunciado == null) ? 0 : enunciado.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((modelosAvaliacoes == null) ? 0 : modelosAvaliacoes.hashCode());
+		result = prime * result + ((resposta == null) ? 0 : resposta.hashCode());
 		return result;
 	}
 
@@ -110,9 +125,12 @@ public class Questao implements Serializable {
 				return false;
 		} else if (!modelosAvaliacoes.equals(other.modelosAvaliacoes))
 			return false;
+		if (resposta == null) {
+			if (other.resposta != null)
+				return false;
+		} else if (!resposta.equals(other.resposta))
+			return false;
 		return true;
 	}
-
 	
-
 }
