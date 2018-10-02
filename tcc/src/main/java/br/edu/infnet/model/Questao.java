@@ -36,6 +36,7 @@ public class Questao implements Serializable {
     @JoinColumn(name = "categoria_id")
 	private CategoriaQuestao categoria;
 	
+	@JsonIgnore
 	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name = "resposta_id")
 	private Resposta resposta;

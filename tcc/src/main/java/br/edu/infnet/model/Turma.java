@@ -52,7 +52,7 @@ public class Turma implements Serializable {
 	private Professor professor;
 	
 	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY)
-	private List<Avaliacao> Avaliacao;
+	private List<Avaliacao> avaliacao;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy") 
@@ -112,11 +112,11 @@ public class Turma implements Serializable {
 
 	@JsonIgnore
 	public List<Avaliacao> getAvaliacao() {
-		return Avaliacao;
+		return avaliacao;
 	}
 
 	public void setAvaliacao(List<Avaliacao> avaliacao) {
-		Avaliacao = avaliacao;
+		this.avaliacao = avaliacao;
 	}
 
 	public Date getInicio() {
@@ -139,7 +139,7 @@ public class Turma implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Avaliacao == null) ? 0 : Avaliacao.hashCode());
+		result = prime * result + ((avaliacao == null) ? 0 : avaliacao.hashCode());
 		result = prime * result + ((alunos == null) ? 0 : alunos.hashCode());
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -160,10 +160,10 @@ public class Turma implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Turma other = (Turma) obj;
-		if (Avaliacao == null) {
-			if (other.Avaliacao != null)
+		if (avaliacao == null) {
+			if (other.avaliacao != null)
 				return false;
-		} else if (!Avaliacao.equals(other.Avaliacao))
+		} else if (!avaliacao.equals(other.avaliacao))
 			return false;
 		if (alunos == null) {
 			if (other.alunos != null)

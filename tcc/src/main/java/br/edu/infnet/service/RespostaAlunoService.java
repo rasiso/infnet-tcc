@@ -1,4 +1,4 @@
-package br.edu.infnet.rest.to;
+package br.edu.infnet.service;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import br.edu.infnet.model.Aluno;
 import br.edu.infnet.model.Resposta;
 import br.edu.infnet.repository.AlunoRepository;
 import br.edu.infnet.repository.RespostaRepository;
+import br.edu.infnet.rest.to.RespostaAlunoTO;
 
 @Service
 public class RespostaAlunoService {
