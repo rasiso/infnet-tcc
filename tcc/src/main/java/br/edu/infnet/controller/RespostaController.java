@@ -19,6 +19,7 @@ import br.edu.infnet.batch.service.EmailService;
 import br.edu.infnet.model.Formulario;
 import br.edu.infnet.model.Questao;
 import br.edu.infnet.model.Resposta;
+import br.edu.infnet.repository.AvaliacaoRepository;
 import br.edu.infnet.repository.FormularioRepository;
 import br.edu.infnet.repository.RespostaRepository;
 
@@ -30,6 +31,8 @@ public class RespostaController {
 	private RespostaRepository respostaRepository;
 	@Autowired
 	private FormularioRepository formularioRepository;
+	@Autowired
+	private AvaliacaoRepository avaliacaoRepository;
 	
 	@Autowired
 	private EmailCoordenadorService emailService;
@@ -79,6 +82,7 @@ public class RespostaController {
 			this.respostaRepository.save(resposta);
 		}
 		this.formularioRepository.marcarComoRespondido(formulario.getId());
+		formulario.setAvaliacao(avaliacaoRepository.obterAvaliacaoViaFormulario(formulario.getId()));
 		emailService.enviarEmail(formulario.getAvaliacao());
 		//return "redirect:/formulario/"+formulario.getId();
 		response.sendRedirect("/formulario/"+formulario.getId());
