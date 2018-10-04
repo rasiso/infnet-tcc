@@ -33,7 +33,7 @@ public class EmailCoordenadorService {
 		destinatarios.add("coordenador@infnet.com.br");
 		assunto = "Atualização dos Formulários Respondidos para a Avalicação "+avaliacao.getCodigo();
 		corpo = "Olá, Coordenador. \nPara verificar as novas respostas clique no link:\n "
-				+ "http://localhost:9090/rest/avaliacao/+"+avaliacao.getCodigo()+"/respostas/";			
+				+ "http://localhost:9090/rest/avaliacao/"+avaliacao.getCodigo()+"/respostas/";			
 			
 		return new Mensagem(remetente, destinatarios, assunto, corpo);	
 	}
