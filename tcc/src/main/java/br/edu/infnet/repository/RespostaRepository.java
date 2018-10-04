@@ -18,7 +18,7 @@ public interface RespostaRepository extends JpaRepository<Resposta, Long>{
 			+ "WHERE al.matricula = :matricula AND f.avaliacao.codigo = :codigo")
 	List<Resposta> obterRespostasDoAlunoSobreAvaliacao(@Param("matricula") String matricula,@Param("codigo") String codigo);
 	
-	
+	List<Resposta> findAll();
 	
 	
 }

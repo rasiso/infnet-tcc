@@ -92,6 +92,17 @@ insert into modelo_avaliacao_x_questao (id_modelo_avaliacao, id_questao) values 
 
 insert into avaliacao (id, codigo, inicio, termino, id_modelo, id_turma) values (1, 'AVALIACAO001', CURRENT_DATE, CURRENT_DATE, 1, 2);
 
+INSERT INTO formulario (id, convite_enviado, respondido, id_avaliacao, id_aluno) VALUES ('1', b'0', b'0', b'1', b'1');
+
+INSERT INTO resposta (id, id_aluno, id_formulario, id_questao, valor) VALUES ('1', '1', '1', '1', '3');
+INSERT INTO resposta (id, id_aluno, id_formulario, id_questao, valor) VALUES ('2', '1', '1', '2', '1');
+INSERT INTO resposta (id, id_aluno, id_formulario, id_questao, valor) VALUES ('3', '1', '1', '3', '2');
+INSERT INTO resposta (id, id_aluno, id_formulario, id_questao, valor) VALUES ('4', '1', '1', '4', '1');
+INSERT INTO resposta (id, id_aluno, id_formulario, id_questao, valor) VALUES ('5', '1', '1', '5', '4');
+
+
+
+
 INSERT INTO role(role_id,role) VALUES (1,'ADMIN');
 INSERT INTO role(role_id,role) VALUES(2,'USER');
  
